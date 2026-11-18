@@ -1,0 +1,108 @@
+﻿@using System.Data;
+@using static WebApplication.Models.EncryptDecryptService;
+@inject LanguageService language
+@{
+    bool isAuthenticated = Convert.ToBoolean(DecryptString(Context.Request.Cookies["IsAuthenticated"]));
+    string UserPrincipalName = DecryptString(Context.Request.Cookies["UserPrincipalName"]);
+    string PhotoPath = (string.IsNullOrEmpty(DecryptString(Context.Request.Cookies["PhotoPath"])) ? "normal.jpg" : DecryptString(Context.Request.Cookies["PhotoPath"]));
+    string DisplayName = DecryptString(Context.Request.Cookies["DisplayName"]);
+    string Surname = DecryptString(Context.Request.Cookies["Surname"]);
+    string FirstName = DecryptString(Context.Request.Cookies["FirstName"]);
+    string LastName = DecryptString(Context.Request.Cookies["LastName"]);
+
+    DataBaseConnection SqlClass = new DataBaseConnection();
+    DataTable _LanguageList = SqlClass.getLanguageList();
+    var LanguageList = _LanguageList.Rows;
+    bool MicrosoftRegistered = Convert.ToBoolean(DecryptString(Context.Request.Cookies["MicrosoftRegistered"]));
+    bool ShowName = Convert.ToBoolean(DecryptString(Context.Request.Cookies["ShowName"]));
+    HashSet<string> permissions = null;
+    if (isAuthenticated)
+    {
+        if (language.Getkey("language_short") == "es")
+        {
+            permissions = new HashSet<string>(DecryptString(Context.Request.Cookies["IdNumModule"]).Split(","));
+        }
+        else
+        {
+            permissions = new HashSet<string>(DecryptString(Context.Request.Cookies["IdNumModule"]).Split(","));
+        }
+    }
+
+}
+
+<div class="app-header-right">
+    <div class="header-btn-lg pr-0">
+        <div class="widget-content p-0">
+            <div class="widget-content-wrapper">
+                <div class="header-dots">
+                    <div class="dropdown">
+                        <button type="button" data-toggle="dropdown" class="p-0 mr-3 btn" style="color: #495057;">
+                            <span class=""><i class="fa fa-globe" aria-hidden="true"></i> @language.Getkey("language_item") (@language.Getkey("language_id"))</span>
+                        </button>
+                        <div tabindex="-1" role="menu" aria-hidden="true" class="rm-pointers dropdown-menu dropdown-menu-language dropdown-menu-right">
+                            @for (int i = 0; i < LanguageList.Count; i++)
+                            {
+                            <a class="dropdown-item" style="width: 100%;" href="/Home/ChangeLanguage?culture=@LanguageList[i]["CultureName"]"> @LanguageList[i]["NativeName"]</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+                @if (isAuthenticated)
+                {
+                    <div class="widget-content-left">
+                        <div class="btn-group">
+                            <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                <img width="42" height="42" class="rounded-circle" src="/images/avatars/@PhotoPath" alt="User profile picture" style="object-fit: cover;">
+                                <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                            </a>
+                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" style="color: #495057;" href="/Profile">@language.Getkey("header_user_account")</a>
+                                <div tabindex="-1" class="dropdown-divider"></div>
+
+                                @if (MicrosoftRegistered)
+                                {
+                                    <a class="dropdown-item" style="color: #495057;" href="/Login/SignOut">@language.Getkey("header_sign_out")</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" style="color: #495057;" href="/Login/SignOutAccount">@language.Getkey("header_sign_out")</a>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-content-left  ml-3 header-user-info">
+                        <div class="widget-heading" style="opacity: 1;">
+                            @if (MicrosoftRegistered)
+                            {
+                                @(ShowName ? DisplayName + " " + Surname : UserPrincipalName);
+                            }
+                            else
+                            {
+                                @(ShowName ? FirstName + " " + LastName : UserPrincipalName);
+                            }
+                        </div>
+                    </div>
+                    <div class="widget-content-right header-user-info ml-3">
+                        @if (MicrosoftRegistered)
+                        {
+                            <a class="nav-link text-dark" href="/Login/SignOut">@language.Getkey("header_sign_out")</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link text-dark" href="/Login/SignOutAccount">@language.Getkey("header_sign_out")</a>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="widget-content-left">
+                        <a class="nav-link text-dark" href="/Login/SignIn">@language.Getkey("sign_in")</a>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

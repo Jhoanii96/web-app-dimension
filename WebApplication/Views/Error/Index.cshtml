@@ -1,0 +1,40 @@
+﻿@model WebApplication.Controllers.ErrorController.ErrorMessage;
+@{ 
+    ViewData["Title"] = "Error";
+
+    string RequestId = Model._RequestId;
+    int FileLineNumber = Model._FileLineNumber;
+    int FileColumnNumber = Model._FileColumnNumber;
+    string Method = Model._Method;
+    string FileName = Model._FileName;
+    string Message = Model._Message;
+    string Class = Model._Class;
+    string FullMessage = Model._FullMessage;
+    string StackTrace = Model._StackTrace;
+}
+
+<h1 class="text-primary">Error.</h1>
+<h2 class="text-primary">An error occurred while processing your request.</h2>
+
+@if (!string.IsNullOrEmpty(RequestId))
+{
+<p>
+    <strong>Request ID:</strong> <code>@RequestId</code>
+</p>}
+
+<p>
+    Environment will display more detailed information about the error that occurred.
+</p>
+<p>
+    @(string.Format("At line {0} column {1} in {2}: ",
+               FileLineNumber, FileColumnNumber,
+               Method))
+    <br />
+    <br />
+    @StackTrace
+    <br />
+    <br />
+    @(string.Format("The class {0}{1}  ",
+               Class,
+               Message)).
+</p>

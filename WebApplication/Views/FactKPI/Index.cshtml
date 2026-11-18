@@ -1,0 +1,157 @@
+﻿@model WebApplication.Controllers.FactKPIController.GroupIndexModel;
+@using WebApplication.Models;
+@inject LanguageService language
+@{
+    ViewData["Title"] = language.Getkey("conf_factkpi_title");
+}
+
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                @language.Getkey("conf_factkpi_title")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="main-card mb-3 card">
+    <div class="card-body">
+        <h5 class="card-title">@language.Getkey("configuration_name")</h5>
+        <div class="row">
+            <div class="col">
+                <ul class="nav flex-column">
+                    <li class="nav-item-header nav-item">@language.Getkey("filter_name")</li>
+                </ul>
+                <div class="row">
+                    <div class="col">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <span class="nav-link coorp-color2" style="cursor: auto; padding-bottom: 0;">
+                                    @language.Getkey("kpi_dropdown_name")
+                                </span>
+                            </li>
+                            <li>
+                                <div style="margin: 0.5rem 1rem;">
+                                    <select type="select" id="factkpi_filter_kpi" class="custom-select">
+                                        <option value="All" selected="selected">@language.Getkey("dropdown_all")</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <span class="nav-link coorp-color2" style="cursor: auto; padding-bottom: 0;">
+                                    @language.Getkey("sosy_dropdown_name")
+                                </span>
+                            </li>
+                            <li>
+                                <div style="margin: 0.5rem 1rem;">
+                                    <select type="select" id="factkpi_filter_source" class="custom-select">
+                                        <option value="All" selected="selected">@language.Getkey("dropdown_all")</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+                <ul class="nav flex-column">
+                    <li class="nav-item-header nav-item">@language.Getkey("activity_name")</li>
+                    <li class="nav-item">
+                        <a id="factkpi_list_add_edit_source" class="nav-link coorp-color2" data-toggle="modal" data-target="#ModalSource">
+                            <i class="nav-link-icon pe-7s-pen"> </i><span>@language.Getkey("add_edit_sosy_btn")</span>
+                        </a>
+                    </li>
+                    <li class="nav-item-divider nav-item"></li>
+                    <li class="nav-item-btn nav-item">
+                        <button id="factkpi_add_new_row" class="btn-pill btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal_add_KPI_Scenario"><i class="nav-link-icon pe-7s-plus"> </i> @language.Getkey("btn_add")</button>
+                        <button id="factkpi_refresh_rows" onClick="refresh_factkpi_table()" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-refresh"> </i> @language.Getkey("btn_refresh")</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">@language.Getkey("conf_factkpi_table_title")</h5>
+                <table id="factkpi_datatable" class="mb-0 table table-hover table-bordered">
+                    <thead style="font-size: 12px;">
+                        <tr>
+                            <th>@language.Getkey("table_col_number")</th>
+                            <th>@language.Getkey("conf_factkpi_table_col_name_1")</th>
+                            <th>@language.Getkey("conf_factkpi_table_col_name_2")</th>
+                            <th>@language.Getkey("conf_factkpi_table_col_name_3")</th>
+                            <th>@language.Getkey("conf_factkpi_table_col_name_4")</th>
+                            <th>@language.Getkey("conf_factkpi_table_col_name_5")</th>
+                            <th>@language.Getkey("conf_factkpi_table_col_name_6")</th>
+                            <th>@language.Getkey("conf_factkpi_table_col_name_7")</th>
+                            <th>@language.Getkey("conf_factkpi_table_col_name_8")</th>
+                        </tr>
+                    </thead>
+                    <tbody id="factkpi_rows_list">
+                        @for (int i = 0; i < Model.CollectionA.Rows.Count; i++)
+                        {
+                            <tr>
+                                <th scope="row" id="row_factkpi_@(i + 1)_id">@(i + 1)</th>
+
+                                <td style="padding: 2px;">@(language.Getkey("language_short") == "es" ? Model.CollectionA.Rows[i]["KPINameEs"] : Model.CollectionA.Rows[i]["KPINameEn"])</td>
+                                <td style="padding: 2px;">@Model.CollectionA.Rows[i]["PeriodName"]</td>
+                                <td style="padding: 2px;">@Model.CollectionA.Rows[i]["ScenarioTypeName"]</td>
+                                <td style="padding: 2px;">@Model.CollectionA.Rows[i]["EquipmentName"]</td>
+                                <td style="padding: 2px;">@Model.CollectionA.Rows[i]["ProcessName"]</td>
+                                <td style="padding: 2px;">@Model.CollectionA.Rows[i]["OperationName"]</td>
+                                <td style="padding: 2px;">@Model.CollectionA.Rows[i]["ExecOrder"]</td>
+                                <td style="padding: 2px;">@Model.CollectionA.Rows[i]["Estado"].ToString()</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+@section ScriptsFactKPI
+{
+    <script>
+        $(function () {
+
+            $("#factkpi_datatable").DataTable({
+                "columnDefs": [
+                    { "width": "50px", "targets": 0 },
+                    { "width": "70px", "targets": 2 },
+                    { "width": "150px", "targets": 3 },
+                    { "width": "75px", "targets": 4 },
+                    { "width": "70px", "targets": 7 },
+                    { "width": "75px", "targets": 8 }
+                ],
+                "lengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
+                "order": [0, "asc"],
+                "searching": true,
+                "language": {
+                    "url": "@(language.Getkey("language_short") == "es" ? "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json" : "//cdn.datatables.net/plug-ins/1.10.15/i18n/English.json")"
+                }
+            })
+
+        });
+    </script>
+}

@@ -1,0 +1,69 @@
+﻿@model WebApplication.Controllers.UserController.GroupIndexModel;
+@inject LanguageService language;
+@{
+    ViewData["Title"] = language.Getkey("conf_userlist_title");
+
+    var ValueA = Model.CollectionA.Rows;
+}
+
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <h3>
+                @language.Getkey("conf_userlist_title")
+            </h3>
+        </div>
+        <div class="page-title-actions" style="display: flex; align-items: center;">
+            <i class="pe-7s-date" style="font-size: 24px;"></i> &thinsp;
+            @DateTime.Now.ToString("F")
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">@language.Getkey("conf_userlist_table_name")</h5>
+                <button id="userlist_add_new_row" class="btn-pill btn btn-primary btn-sm mb-3"><i class="nav-link-icon pe-7s-plus"> </i> @language.Getkey("btn_add")</button>
+                <table class="mb-0 table table-hover">
+                    <thead style="font-size: 12px;">
+                        <tr>
+                            <th>@language.Getkey("table_col_number")</th>
+                            <th>@language.Getkey("conf_userlist_column_name_1")</th>
+                            <th>@language.Getkey("conf_userlist_column_name_2")</th>
+                            <th>@language.Getkey("conf_userlist_column_name_3")</th>
+                            <th>@language.Getkey("conf_userlist_column_name_4")</th>
+                            <th>@language.Getkey("conf_userlist_column_name_5")</th>
+                            <th style="width: 84px;">@language.Getkey("table_col_actions")</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userlist_rows_list">
+                        @for (int i = 0; i < ValueA.Count; i++)
+                        {
+                            <tr>
+                                <td scope="row" id="row_userlist_@(i + 1)_id" data-value="@ValueA[i]["IdUser"]">@(i + 1)</td>
+                                <td>@(ValueA[i]["MicrosoftRegistered"].ToString() == "True" ? ValueA[i]["DisplayName"].ToString() : ValueA[i]["FirstName"].ToString())</td>
+                                <td>@(ValueA[i]["MicrosoftRegistered"].ToString() == "True" ? ValueA[i]["Surname"].ToString() : ValueA[i]["LastName"].ToString())</td>
+                                <td>@ValueA[i]["UserPrincipalName"]</td>
+                                <td><div class="hidden-text-nowrap" title="@(language.Getkey("language_short") == "es" ? ValueA[i]["ModuleName_ES"] : ValueA[i]["ModuleName_EN"])">@(language.Getkey("language_short") == "es" ? ValueA[i]["ModuleName_ES"] : ValueA[i]["ModuleName_EN"])</div></td>
+                                <td><div class="status_btn @(ValueA[i]["Enabled"].ToString() == "True" ? "status_active" : "status_inactive")">@(ValueA[i]["Enabled"].ToString() == "True" ? "Active" : "Inactive")</div></td>
+                                <td style="padding: 2px;">
+                                    <div class="input-group">
+                                        <button type="button" id="row_userlist_btn_@(i + 1)_edr" onClick="edit_userlist_row(@(i + 1))" class="btn btn-primary btn-iconv2" style="margin-right: 2px !important;"><i class="fa fa-pen fa-w-16 fa-1x"></i></button>
+                                        <button type="button" id="row_userlist_btn_@(i + 1)_der" onClick="delete_userlist_row('@(i + 1). @ValueA[i]["UserPrincipalName"]', @(i + 1))" class="btn btn-primary btn-iconv2"><i class="fa fa-trash fa-w-16 fa-1x"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

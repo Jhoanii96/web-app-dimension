@@ -1,0 +1,111 @@
+﻿@model WebApplication.Controllers.UserController.GroupIndexModel;
+@inject LanguageService language;
+@{
+    ViewData["Title"] = language.Getkey("conf_adduser_title");
+
+    var ValueA = Model.CollectionA.Rows;
+
+}
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <span style="margin-left: 10px;">@language.Getkey("conf_adduser_title")</span>
+                    </div>
+                    <div class="row card-body">
+
+                        <div class="col-lg-6">
+                            <div class="tab-content">
+                                <h6 class="mb-3">@language.Getkey("conf_adduser_subtitle_1")</h6>
+                                <div class="form-group row">
+                                    <label for="inputUserFisrtName" class="col-sm-2 col-form-label">@language.Getkey("conf_adduser_input_1")</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputUserFisrtName" placeholder="@language.Getkey("conf_adduser_input_1")">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputUserLastName" class="col-sm-2 col-form-label">@language.Getkey("conf_adduser_input_2")</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputUserLastName" placeholder="@language.Getkey("conf_adduser_input_2")">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputUserEmail" class="col-sm-2 col-form-label">@language.Getkey("conf_adduser_input_3")</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="inputUserEmail" placeholder="@language.Getkey("conf_adduser_input_3")">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="offset-sm-2 col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="inputUserShowName">&nbsp;@language.Getkey("conf_adduser_input_4")
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="offset-sm-2 col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <span style="color: #216499;">@language.Getkey("conf_adduser_description")</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="tab-content">
+                                <h6 class="mb-3">@language.Getkey("conf_adduser_subtitle_2")</h6>
+                                <div class="row">
+                                    @for (int i = 0; i < ValueA.Count; i++)
+                                    {
+                                        <div class="col-md-6 text-vertical-center mtb-permissions">
+                                            <input type="checkbox" id="module_checkbox_@(i + 1)" data-idval="@ValueA[i]["IdModule"]"> <label for="module_checkbox_@(i + 1)" style="margin: 0;">&thinsp; @(language.Getkey("language_short") == "es" ? ValueA[i]["ModuleName_ES"] : ValueA[i]["ModuleName_EN"])</label>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="divider"></div>
+                                <div class="row">
+                                    <div class="col-md-12 text-vertical-center mtb-permissions">
+                                        <input type="checkbox" id="module_checkbox_all"> <label for="module_checkbox_all" style="margin: 0;">&thinsp; @language.Getkey("conf_adduser_all_modules")</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="text-right">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <button type="button" id="btn_add_new_user" class="btn btn-primary mr-3">@language.Getkey("btn_add")</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+

@@ -1,0 +1,161 @@
+﻿@using static WebApplication.Models.EncryptDecryptService;
+@model WebApplication.Controllers.UserController.GroupIndexModel;
+@inject LanguageService language;
+@{
+    ViewData["Title"] = language.Getkey("conf_edituser_title");
+
+    string ActualUser = DecryptString(Context.Request.Cookies["UserPrincipalName"]);
+
+    var DataUser = Model.CollectionA.Rows;
+    string IdUser = EncryptString(DataUser[0]["IdUser"].ToString());
+    string DisplayName = DataUser[0]["DisplayName"].ToString();
+    string Surname = DataUser[0]["Surname"].ToString();
+    string UserPrincipalName = DataUser[0]["UserPrincipalName"].ToString();
+    bool MicrosoftRegistered = Convert.ToBoolean(DataUser[0]["MicrosoftRegistered"]);
+    bool ShowName = Convert.ToBoolean(DataUser[0]["ShowName"]);
+    string FirstName = DataUser[0]["FirstName"].ToString();
+    string LastName = DataUser[0]["LastName"].ToString();
+    string ModuleName_EN = DataUser[0]["ModuleName_EN"].ToString();
+    string ModuleName_ES = DataUser[0]["ModuleName_ES"].ToString();
+    bool UserEnabled = Convert.ToBoolean(DataUser[0]["Enabled"]);
+    int[] IdsModule = (DataUser[0]["IdNumModule"].ToString()).Split(',').Select(Int32.Parse).ToArray();
+
+}
+
+
+<script type="text/javascript">
+    window.a = "@Html.Raw(IdUser)";
+    window.b = "@Html.Raw(MicrosoftRegistered)";
+</script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item"><a asp-controller="User" asp-action="UserList">User List</a></li>
+                <li class="active breadcrumb-item" aria-current="page">Edit</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <span style="margin-left: 10px;">@(language.Getkey("edituser_information_headerbox")): @(MicrosoftRegistered ? language.Getkey("conf_edituser_microsoft_account") : language.Getkey("conf_edituser_basic_account"))</span>
+                    </div>
+                    <div class="row card-body">
+
+                        <div class="col-lg-6">
+                            <div class="tab-content">
+                                <h6 class="mb-3">@language.Getkey("adduser_information_subtitle")</h6>
+                                <div class="form-group row">
+                                    <label for="inputEditUserFirstName" class="col-sm-2 col-form-label">@language.Getkey("conf_edituser_input_1")</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputEditUserFirstName" placeholder="@language.Getkey("conf_edituser_input_1")" value="@(MicrosoftRegistered ? DisplayName : FirstName)" @(MicrosoftRegistered ? "disabled=\"disabled\"" : "")>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEditUserLastName" class="col-sm-2 col-form-label">@language.Getkey("conf_edituser_input_2")</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputEditUserLastName" placeholder="@language.Getkey("conf_edituser_input_2")" value="@(MicrosoftRegistered ? Surname : LastName)" @(MicrosoftRegistered ? "disabled=\"disabled\"" : "")>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEditUserEmail" class="col-sm-2 col-form-label">@language.Getkey("conf_edituser_input_3")</label>
+                                    <div class="col-sm-10">
+                                        <input type="email" class="form-control" id="inputEditUserEmail" placeholder="@language.Getkey("conf_edituser_input_3")" value="@UserPrincipalName" disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="offset-sm-2 col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="inputEditUserShowName" @(ShowName ? "checked=\"checked\"" : "")>&nbsp; @language.Getkey("conf_edituser_input_4")
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEditUserEnabled" class="col-sm-2 col-form-label">@language.Getkey("conf_adduser_input_5")</label>
+                                    <div class="col-sm-10">
+                                        @if (ActualUser == UserPrincipalName)
+                                        {
+                                            <label class="mt-2">@language.Getkey("conf_adduser_user_enabled_text")</label>
+                                        }
+                                        else
+                                        {
+                                            <label class="switch" style="margin-top: 10px;">
+                                                <input type="checkbox" id="inputEditUserEnabled" @(UserEnabled ? "checked=\"checked\"" : "")>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEditUserEmail" class="col-sm-2 col-form-label">@language.Getkey("conf_adduser_reset_password")</label>
+                                    <div class="col-sm-10">
+                                        @if (MicrosoftRegistered)
+                                        {
+                                            <label class="mt-2">@language.Getkey("conf_adduser_reset_password_text")</label>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" id="inputEditUserReset" class="btn btn-primary mr-3 mt-2">@language.Getkey("btn_reset")</button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="tab-content">
+                                <h6 class="mb-3">@language.Getkey("conf_edituser_subtitle_2")</h6>
+                                <div class="row">
+                                    @for (int i = 0; i < Model.CollectionB.Rows.Count; i++)
+                                    {
+                                        <div class="col-md-6 text-vertical-center mtb-permissions">
+                                            <input type="checkbox" id="module_edituser_checkbox_@(i + 1)" data-idval="@Model.CollectionB.Rows[i]["IdModule"]" data-idnumval="@Model.CollectionB.Rows[i]["Id"]" @(IdsModule.Contains(Convert.ToInt32(Model.CollectionB.Rows[i]["Id"])) ? "checked=\"checked\"" : "")> <label for="module_edituser_checkbox_@(i + 1)" style="margin: 0;">&thinsp; @(language.Getkey("language_short") == "es" ? Model.CollectionB.Rows[i]["ModuleName_ES"] : Model.CollectionB.Rows[i]["ModuleName_EN"])</label>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="divider"></div>
+                                <div class="row">
+                                    <div class="col-md-12 text-vertical-center mtb-permissions">
+                                        <input type="checkbox" id="module_edituser_checkbox_all"> <label for="module_edituser_checkbox_all" style="margin: 0;">&thinsp; @language.Getkey("edituser_all_permissions")</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="text-right">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <button type="button" id="btn_edit_user" class="btn btn-primary mr-3">@language.Getkey("btn_update")</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+

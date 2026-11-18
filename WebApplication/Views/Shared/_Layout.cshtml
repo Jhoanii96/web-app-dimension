@@ -1,0 +1,736 @@
+﻿@using static WebApplication.Models.EncryptDecryptService;
+@using System.Data;
+@inject LanguageService language
+@{
+
+    bool isAuthenticated = false;
+    string controller_name = string.Empty;
+    string appBaseUrl = string.Empty;
+    HashSet<string> permissions = null;
+    DataBaseConnection SqlClass = new DataBaseConnection();
+    DataTable ReportData = null;
+
+    isAuthenticated = Convert.ToBoolean(DecryptString(Context.Request.Cookies["IsAuthenticated"]));
+    controller_name = this.ViewContext.RouteData.Values["controller"].ToString();
+    //string report_name = string.Empty;
+    //if (controller_name == "Report")
+    //{
+    //    report_name = this.ViewContext.RouteData.Values["report_name"].ToString();
+    //}
+    if (isAuthenticated)
+    {
+        if (language.Getkey("language_short") == "es")
+        {
+            permissions = new HashSet<string>(DecryptString(Context.Request.Cookies["IdNumModule"]).Split(","));
+        }
+        else
+        {
+            permissions = new HashSet<string>(DecryptString(Context.Request.Cookies["IdNumModule"]).Split(","));
+        }
+
+    }
+    ReportData = SqlClass.getReportList();
+
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="This is an example dashboard created using build-in elements and components.">
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <!--
+    =========================================================
+    * ArchitectUI HTML Theme Dashboard - v1.0.0
+    =========================================================
+    * Product Page: https://dashboardpack.com
+    * Copyright 2019 DashboardPack (https://dashboardpack.com)
+    * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
+    =========================================================
+    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="/css/main.css?v=mO64kHAxFpySWi8mFTNUfZWo1gWCvIIa4tohdD1Cyi8" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <link href="/css/jquery-ui-1.9.2.css" rel="stylesheet" />
+    <link href="/css/select2.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/css/dataTables.bootstrap.min.css">
+
+    <link href="/css/site.min.css" rel="stylesheet" asp-append-version="true">
+
+    <script type="text/javascript">
+        // Global variables
+        window.language_short = "@Html.Raw(language.Getkey("language_short"))";
+
+        window.yes_btn = "@Html.Raw(language.Getkey("yes_btn"))";
+        window.no_btn = "@Html.Raw(language.Getkey("no_btn"))";
+        window.delete_header_message = "@Html.Raw(language.Getkey("delete_header_message"))";
+        window.delete_body_message = "@Html.Raw(language.Getkey("delete_body_message"))";
+        window.delete_body_message2 = "@Html.Raw(language.Getkey("delete_body_message2"))";
+
+        window.login_basic_next_btn = "@Html.Raw(language.Getkey("login_basic_next_btn"))";
+        window.login_basic_account_header_1 = "@Html.Raw(language.Getkey("login_basic_account_header_1"))";
+        window.login_basic_account_header_2 = "@Html.Raw(language.Getkey("login_basic_account_header_2"))";
+        window.login_basic_account_header_3 = "@Html.Raw(language.Getkey("login_basic_account_header_3"))";
+        window.login_basic_account_header_4 = "@Html.Raw(language.Getkey("login_basic_account_header_4"))";
+        window.login_basic_user_not_found = "@Html.Raw(language.Getkey("login_basic_user_not_found"))";
+        window.login_basic_password_not_match = "@Html.Raw(language.Getkey("login_basic_password_not_match"))";
+        window.login_basic_register_btn = "@Html.Raw(language.Getkey("login_basic_register_btn"))";
+        window.login_basic_login_btn = "@Html.Raw(language.Getkey("login_basic_login_btn"))";
+        window.login_basic_message_label = "@Html.Raw(language.Getkey("login_basic_message_label"))";
+        window.login_basic_enter_password = "@Html.Raw(language.Getkey("login_basic_enter_password"))";
+    </script>
+
+</head>
+
+<body>
+
+    <div class="app-container app-theme-white body-tabs-shadow fixed-header @(isAuthenticated == true ? "fixed-sidebar" : "")">
+        <div class="app-header header-shadow">
+            @if (isAuthenticated)
+            {
+                <div class="app-header__logo">
+                    <div class="logo-src"></div>
+                    <div class="header__pane ml-auto">
+                        <div>
+                            <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="app-header__mobile-menu">
+                <div>
+                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="app-header__menu">
+                <span>
+                    <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                        <span class="btn-icon-wrapper">
+                            <i class="fa fa-ellipsis-v fa-w-6"></i>
+                        </span>
+                    </button>
+                </span>
+            </div>
+            <div class="app-header__content">
+
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+        <div class="app-main">
+            @if (isAuthenticated)
+            {
+                <div class="app-sidebar sidebar-shadow bg-primary2 sidebar-text-light">
+                    <div class="app-header__logo">
+                        <div class="logo-src"></div>
+                        <div class="header__pane ml-auto">
+                            <div>
+                                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                                    <span class="hamburger-box">
+                                        <span class="hamburger-inner"></span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="app-header__mobile-menu">
+                        <div>
+                            <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                                <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="app-header__menu">
+                        <span>
+                            <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                                <span class="btn-icon-wrapper">
+                                    <i class="fa fa-ellipsis-v fa-w-6"></i>
+                                </span>
+                            </button>
+                        </span>
+                    </div>
+
+                    <div class="scrollbar-sidebar" style="overflow: auto;">
+                        <div class="app-sidebar__inner">
+                            <ul class="vertical-nav-menu">
+                                @if (permissions.Contains("0") || permissions.Contains("1") || permissions.Contains("2"))
+                                {
+                                    <li class="app-sidebar__heading">@language.Getkey("heading_dashboard")</li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("1"))
+                                {
+                                    <li>
+                                        <a href="/Home" @(controller_name == "Home" ? "class=mm-active" : "")>
+                                            <i class="metismenu-icon pe-7s-graph1"></i>
+                                            @language.Getkey("subheading_dashboard")
+                                        </a>
+                                    </li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("2"))
+                                {
+                                    <li @(controller_name == "Report" ? "class=mm-active" : "")>
+                                        <a href="javascript:void(0);">
+                                            <i class="metismenu-icon pe-7s-graph2"></i>
+                                            @language.Getkey("heading_report")
+                                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                        </a>
+                                        @if (controller_name == "Report")
+                                        {
+                                            <ul class="mm-collapse">
+                                                <li>
+                                                    @for (int i = 0; i < ReportData.Rows.Count; i++)
+                                                    {
+                                                        <a asp-controller="Report" asp-action="Index" asp-route-report_id="@ReportData.Rows[i]["ReportCode"].ToString()">
+                                                            <i class="metismenu-icon"></i>
+                                                            @(language.Getkey("language_short") == "es" ? ReportData.Rows[i]["ReportEsMenuName"].ToString() : ReportData.Rows[i]["ReportEnMenuName"].ToString())
+                                                        </a>
+                                                    }
+                                                </li>
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <ul class="mm-collapse" style="height: 6px;">
+                                                <li>
+                                                    @for (int i = 0; i < ReportData.Rows.Count; i++)
+                                                    {
+                                                        <a asp-controller="Report" asp-action="Index" asp-route-report_id="@ReportData.Rows[i]["ReportCode"].ToString()">
+                                                            <i class="metismenu-icon"></i>
+                                                            @(language.Getkey("language_short") == "es" ? ReportData.Rows[i]["ReportEsMenuName"].ToString() : ReportData.Rows[i]["ReportEnMenuName"].ToString())
+                                                        </a>
+                                                    }
+                                                </li>
+                                            </ul>
+                                        }
+                                    </li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("3") || permissions.Contains("4") || permissions.Contains("5") || permissions.Contains("6") ||
+permissions.Contains("7") || permissions.Contains("8") || permissions.Contains("9") || permissions.Contains("10") ||
+permissions.Contains("11") || permissions.Contains("12"))
+                                {
+                                    <li class="app-sidebar__heading">@language.Getkey("heading_dimension")</li>
+                                }
+
+                                @if (permissions.Contains("0") || permissions.Contains("3"))
+                                {
+                                    <li>
+                                        @if (controller_name == "KPI")
+                                        {
+                                            <a asp-controller="KPI" asp-action="Index" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-display1"></i>
+                                                @language.Getkey("subheading_kpi")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="KPI" asp-action="Index">
+                                                <i class="metismenu-icon pe-7s-display1"></i>
+                                                @language.Getkey("subheading_kpi")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("4"))
+                                {
+                                    <li>
+                                        @if (controller_name == "KPIScenario")
+                                        {
+                                            <a href="/KPIScenario" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-display2"></i>
+                                                @language.Getkey("subheading_kpisce")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/KPIScenario">
+                                                <i class="metismenu-icon pe-7s-display2"></i>
+                                                @language.Getkey("subheading_kpisce")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("5"))
+                                {
+                                    <li>
+                                        @if (controller_name == "Equipment")
+                                        {
+                                            <a href="/Equipment" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-tools"></i>
+                                                @language.Getkey("subheading_equipment")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Equipment">
+                                                <i class="metismenu-icon pe-7s-tools"></i>
+                                                @language.Getkey("subheading_equipment")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+
+                                @if (permissions.Contains("0") || permissions.Contains("6"))
+                                {
+                                    <li>
+                                        @if (controller_name == "Period")
+                                        {
+                                            <a href="/Period" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-date"></i>
+                                                @language.Getkey("subheading_period")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Period">
+                                                <i class="metismenu-icon pe-7s-date"></i>
+                                                @language.Getkey("subheading_period")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+
+                                @if (permissions.Contains("0") || permissions.Contains("7"))
+                                {
+                                    <li>
+                                        @if (controller_name == "Operation")
+                                        {
+                                            <a href="/Operation" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-config"></i>
+                                                @language.Getkey("subheading_operation")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Operation">
+                                                <i class="metismenu-icon pe-7s-config"></i>
+                                                @language.Getkey("subheading_operation")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+
+                                @if (permissions.Contains("0") || permissions.Contains("8"))
+                                {
+                                    <li>
+                                        @if (controller_name == "Process")
+                                        {
+                                            <a href="/Process" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-album"></i>
+                                                @language.Getkey("subheading_process")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Process">
+                                                <i class="metismenu-icon pe-7s-album"></i>
+                                                @language.Getkey("subheading_process")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("9"))
+                                {
+                                    <li>
+                                        @if (controller_name == "ScenarioType")
+                                        {
+                                            <a href="/ScenarioType" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-map"></i>
+                                                @language.Getkey("subheading_scenariotype")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/ScenarioType">
+                                                <i class="metismenu-icon pe-7s-map"></i>
+                                                @language.Getkey("subheading_scenariotype")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("10"))
+                                {
+                                    <li>
+                                        @if (controller_name == "SourceSystem")
+                                        {
+                                            <a href="/SourceSystem" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-server"></i>
+                                                @language.Getkey("subheading_sourcesystem")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/SourceSystem">
+                                                <i class="metismenu-icon pe-7s-server"></i>
+                                                @language.Getkey("subheading_sourcesystem")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("11"))
+                                {
+                                    <li>
+                                        @if (controller_name == "Uom")
+                                        {
+                                            <a href="/Uom" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-note2"></i>
+                                                @language.Getkey("subheading_uom")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Uom">
+                                                <i class="metismenu-icon pe-7s-note2"></i>
+                                                @language.Getkey("subheading_uom")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("12"))
+                                {
+                                    <li>
+                                        @if (controller_name == "Category")
+                                        {
+                                            <a href="/Category" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-photo-gallery"></i>
+                                                @language.Getkey("subheading_category")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Category">
+                                                <i class="metismenu-icon pe-7s-photo-gallery"></i>
+                                                @language.Getkey("subheading_category")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("13") || permissions.Contains("14") || permissions.Contains("15") ||
+                           permissions.Contains("16") || permissions.Contains("17") || permissions.Contains("18") || permissions.Contains("19"))
+                                {
+                                    <li class="app-sidebar__heading">@language.Getkey("heading_setting")</li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("18"))
+                                {
+                                    <li>
+                                        @if (controller_name == "FactKPI")
+                                        {
+                                            <a href="/FactKPI" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-ribbon"></i>
+                                                @language.Getkey("subheading_factkpi")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/FactKPI">
+                                                <i class="metismenu-icon pe-7s-ribbon"></i>
+                                                @language.Getkey("subheading_factkpi")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("19"))
+                                {
+                                    <li>
+                                        @if (controller_name == "CnfSourceSystem")
+                                        {
+                                            <a href="/CnfSourceSystem" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-server"></i>
+                                                @language.Getkey("subheading_cnf_sourcesystem")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/CnfSourceSystem">
+                                                <i class="metismenu-icon pe-7s-server"></i>
+                                                @language.Getkey("subheading_cnf_sourcesystem")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("20"))
+                                {
+                                    <li>
+                                        @if (controller_name == "LanguageSetting")
+                                        {
+                                            <a href="/LanguageSetting" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-global"></i>
+                                                @language.Getkey("subheading_cnf_languagesetting")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/LanguageSetting">
+                                                <i class="metismenu-icon pe-7s-global"></i>
+                                                @language.Getkey("subheading_cnf_languagesetting")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+                                @if (permissions.Contains("0") || permissions.Contains("13"))
+                                {
+                                    <li>
+                                        @if (controller_name == "Module")
+                                        {
+                                            <a href="/Module" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-bookmarks"></i>
+                                                @language.Getkey("subheading_modulesetting")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Module">
+                                                <i class="metismenu-icon pe-7s-bookmarks"></i>
+                                                @language.Getkey("subheading_modulesetting")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+
+                                @if (permissions.Contains("0") || permissions.Contains("16"))
+                                {
+                                    <li>
+                                        @if (controller_name == "ReportSettings")
+                                        {
+                                            <a href="/ReportSetting" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-note2"></i>
+                                                @language.Getkey("subheading_reportsetting")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/ReportSetting">
+                                                <i class="metismenu-icon pe-7s-note2"></i>
+                                                @language.Getkey("subheading_reportsetting")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+
+                                @if (permissions.Contains("0") || permissions.Contains("17"))
+                                {
+                                    <li>
+                                        @if (controller_name == "Measurement")
+                                        {
+                                            <a href="/Measurement" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-compass"></i>
+                                                @language.Getkey("subheading_measurement")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Measurement">
+                                                <i class="metismenu-icon pe-7s-compass"></i>
+                                                @language.Getkey("subheading_measurement")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+
+                                @if (permissions.Contains("0") || permissions.Contains("14"))
+                                {
+                                    <li @(controller_name == "User" ? "class=mm-active" : "")>
+                                        <a href="javascript:void(0);">
+                                            <i class="metismenu-icon pe-7s-users"></i>
+                                            @language.Getkey("subheading_user")
+                                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                        </a>
+                                        @if (controller_name == "User")
+                                        {
+                                            <ul class="mm-collapse">
+                                                <li>
+                                                    <a href="/User/UserList">
+                                                        <i class="metismenu-icon"></i>
+                                                        @language.Getkey("subheading_user_list")
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/User/AddUser">
+                                                        <i class="metismenu-icon"></i>
+                                                        @language.Getkey("subheading_user_add")
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <ul class="mm-collapse" style="height: 6px;">
+                                                <li>
+                                                    <a href="/User/UserList">
+                                                        <i class="metismenu-icon"></i>
+                                                        @language.Getkey("subheading_user_list")
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/User/AddUser">
+                                                        <i class="metismenu-icon"></i>
+                                                        @language.Getkey("subheading_user_add")
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        }
+                                    </li>
+                                }
+
+                                @if (permissions.Contains("0") || permissions.Contains("15"))
+                                {
+                                    <li>
+                                        @if (controller_name == "Profile")
+                                        {
+                                            <a href="/Profile" class="mm-active">
+                                                <i class="metismenu-icon pe-7s-id"></i>
+                                                @language.Getkey("subheading_profile")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Profile">
+                                                <i class="metismenu-icon pe-7s-id"></i>
+                                                @language.Getkey("subheading_profile")
+                                            </a>
+                                        }
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            }
+            <div class="app-main__outer" style="height: calc(100vh - 60px);">
+                <div class="app-main__inner @(controller_name == "Login" ? "login-mode" : "")">
+                    @RenderBody()
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/jquery-1.8.3.js"></script>
+    <script src="/js/select2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="/js/jquery-ui-1.9.2.js"></script>
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/dataTables.bootstrap.min.js"></script>
+    
+    <script src="/app/bundle.min.js" asp-append-version="true"></script>
+
+    @*<script src="/js/site.js" asp-append-version="true"></script>
+
+        <script src="/js/sitekpi.js" asp-append-version="true"></script>
+        <script src="/js/sitekpiscenario.js" asp-append-version="true"></script>
+        <script src="/js/siteequipment.js" asp-append-version="true"></script>
+        <script src="/js/siteperiod.js" asp-append-version="true"></script>
+        <script src="/js/siteoperation.js" asp-append-version="true"></script>
+        <script src="/js/siteprocess.js" asp-append-version="true"></script>
+
+        <script src="/js/sitescenariotype.js" asp-append-version="true"></script>
+        <script src="/js/sitesourcesystem.js" asp-append-version="true"></script>
+        <script src="/js/sitecategory.js" asp-append-version="true"></script>
+        <script src="/js/siteuom.js" asp-append-version="true"></script>
+
+        <script src="/js/siteprofile.js" asp-append-version="true"></script>
+        <script src="/js/sitemodule.js" asp-append-version="true"></script>
+        <script src="/js/sitereportsetting.js" asp-append-version="true"></script>
+        <script src="/js/siteuserlist.js" asp-append-version="true"></script>
+        <script src="/js/siteadduser.js" asp-append-version="true"></script>
+        <script src="/js/siteedituser.js" asp-append-version="true"></script>
+        <script src="/js/sitemeasurement.js" asp-append-version="true"></script>
+        <script src="/js/sitecnfsourcesystem.js" asp-append-version="true"></script>
+        <script src="/js/sitelanguagesetting.js" asp-append-version="true"></script>
+
+        <script src="/js/sitelogin.js" asp-append-version="true"></script>*@
+
+    @if (IsSectionDefined("ScriptsHome"))
+    {
+
+        @RenderSection("ScriptsHome", required: true);
+
+    }
+    @if (IsSectionDefined("ScriptsReport"))
+    {
+
+        @RenderSection("ScriptsReport", required: true);
+
+    }
+
+    @if (IsSectionDefined("ScriptsKPI"))
+    {
+
+        @RenderSection("ScriptsKPI", required: true);
+
+    }
+
+    @if (IsSectionDefined("ScriptsFactKPI"))
+    {
+
+        @RenderSection("ScriptsFactKPI", required: true);
+
+    }
+
+</body>
+</html>
+
+<div id="dialog-delete-confirm"></div>
+
+@if (IsSectionDefined("ModalsKPI"))
+{
+
+    @RenderSection("ModalsKPI", required: true);
+
+}
+
+@if (IsSectionDefined("ModalsKPIScenario"))
+{
+
+    @RenderSection("ModalsKPIScenario", required: true);
+
+}
+
+@if (IsSectionDefined("ModalsEquipment"))
+{
+
+    @RenderSection("ModalsEquipment", required: true);
+
+}
+
+@if (IsSectionDefined("ModalsProcess"))
+{
+
+    @RenderSection("ModalsProcess", required: true);
+
+}
+
+@if (IsSectionDefined("ModalsMeasurement"))
+{
+
+    @RenderSection("ModalsMeasurement", required: true);
+
+}
+
+@if (IsSectionDefined("ModalsLanguageSetting"))
+{
+
+    @RenderSection("ModalsLanguageSetting", required: true);
+
+}
+

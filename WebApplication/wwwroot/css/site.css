@@ -1,0 +1,1652 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+::-moz-selection { /* Code for Firefox */
+    color: #216499 !important;
+    background: #ffb909 !important;
+}
+
+::selection {
+    color: #216499 !important;
+    background: #ffb909 !important;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #216499;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #32aade;
+}
+
+body {
+    background-color: #f1f4f6;
+}
+
+[type="search"] {
+    outline: none;
+}
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #000;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 12px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 12px;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+.rounded-circle {
+    border-radius: 50% !important
+}
+
+
+.header-dots {
+    margin-left: auto;
+    display: flex;
+}
+
+.header-dots>.dropdown {
+    display: flex;
+    align-content: center;
+}
+
+.header-dots .icon-wrapper-alt {
+    margin: 0;
+    height: 44px;
+    width: 44px;
+    text-align: center;
+    overflow: visible;
+}
+.header-dots .icon-wrapper-alt .icon-wrapper-bg {
+    opacity: .1;
+    transition: opacity .2s;
+    border-radius: 40px;
+}
+.icon-wrapper .icon-wrapper-bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    opacity: .2;
+}
+.header-dots .icon-wrapper-alt .language-icon {
+    border-radius: 30px;
+    position: relative;
+    z-index: 4;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.icon-wrapper {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.icon-wrapper {
+    width: 54px;
+    height: 54px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.flag {
+    height: 16px;
+    width: 16px;
+    background-size: 16px 16px
+}
+
+.flag.medium {
+    height: 24px;
+    width: 24px;
+    background-size: 24px 24px
+}
+
+.flag.large {
+    height: 32px;
+    width: 32px;
+    background-size: 32px 32px
+}
+
+.dropdown-item.active a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.AD {
+    background: url(../images/AD.svg) no-repeat
+}
+
+.AE {
+    background: url(../images/AE.svg) no-repeat
+}
+
+.AF {
+    background: url(../images/AF.svg) no-repeat
+}
+
+.AG {
+    background: url(../images/AG.svg) no-repeat
+}
+
+.AI {
+    background: url(../images/AI.svg) no-repeat
+}
+
+.AL {
+    background: url(../images/AL.svg) no-repeat
+}
+
+.AM {
+    background: url(../images/AM.svg) no-repeat
+}
+
+.AO {
+    background: url(../images/AO.svg) no-repeat
+}
+
+.AR {
+    background: url(../images/AR.svg) no-repeat
+}
+
+.AS {
+    background: url(../images/AS.svg) no-repeat
+}
+
+.AT {
+    background: url(../images/AT.svg) no-repeat
+}
+
+.AU {
+    background: url(../images/AU.svg) no-repeat
+}
+
+.AW {
+    background: url(../images/AW.svg) no-repeat
+}
+
+.AX {
+    background: url(../images/AX.svg) no-repeat
+}
+
+.AZ {
+    background: url(../images/AZ.svg) no-repeat
+}
+
+.BA {
+    background: url(../images/BA.svg) no-repeat
+}
+
+.BB {
+    background: url(../images/BB.svg) no-repeat
+}
+
+.BD {
+    background: url(../images/BD.svg) no-repeat
+}
+
+.BE {
+    background: url(../images/BE.svg) no-repeat
+}
+
+.BF {
+    background: url(../images/BF.svg) no-repeat
+}
+
+.BG {
+    background: url(../images/BG.svg) no-repeat
+}
+
+.BH {
+    background: url(../images/BH.svg) no-repeat
+}
+
+.BI {
+    background: url(../images/BI.svg) no-repeat
+}
+
+.BJ {
+    background: url(../images/BJ.svg) no-repeat
+}
+
+.BL {
+    background: url(../images/BL.svg) no-repeat
+}
+
+.BM {
+    background: url(../images/BM.svg) no-repeat
+}
+
+.BN {
+    background: url(../images/BN.svg) no-repeat
+}
+
+.BO {
+    background: url(../images/BO.svg) no-repeat
+}
+
+.BR {
+    background: url(../images/BR.svg) no-repeat
+}
+
+.BS {
+    background: url(../images/BS.svg) no-repeat
+}
+
+.BT {
+    background: url(../images/BT.svg) no-repeat
+}
+
+.BV {
+    background: url(../images/BV.svg) no-repeat
+}
+
+.BW {
+    background: url(../images/BW.svg) no-repeat
+}
+
+.BY {
+    background: url(../images/BY.svg) no-repeat
+}
+
+.BZ {
+    background: url(../images/BZ.svg) no-repeat
+}
+
+.CA {
+    background: url(../images/CA.svg) no-repeat
+}
+
+.CC {
+    background: url(../images/CC.svg) no-repeat
+}
+
+.CD {
+    background: url(../images/CD.svg) no-repeat
+}
+
+.CF {
+    background: url(../images/CF.svg) no-repeat
+}
+
+.CG {
+    background: url(../images/CG.svg) no-repeat
+}
+
+.CH {
+    background: url(../images/CH.svg) no-repeat
+}
+
+.CI {
+    background: url(../images/CI.svg) no-repeat
+}
+
+.CK {
+    background: url(../images/CK.svg) no-repeat
+}
+
+.CL {
+    background: url(../images/CL.svg) no-repeat
+}
+
+.CM {
+    background: url(../images/CM.svg) no-repeat
+}
+
+.CN {
+    background: url(../images/CN.svg) no-repeat
+}
+
+.CO {
+    background: url(../images/CO.svg) no-repeat
+}
+
+.CR {
+    background: url(../images/CR.svg) no-repeat
+}
+
+.CU {
+    background: url(../images/CU.svg) no-repeat
+}
+
+.CV {
+    background: url(../images/CV.svg) no-repeat
+}
+
+.CW {
+    background: url(../images/CW.svg) no-repeat
+}
+
+.CX {
+    background: url(../images/CX.svg) no-repeat
+}
+
+.CY {
+    background: url(../images/CY.svg) no-repeat
+}
+
+.CZ {
+    background: url(../images/CZ.svg) no-repeat
+}
+
+.DE {
+    background: url(../images/DE.svg) no-repeat
+}
+
+.DJ {
+    background: url(../images/DJ.svg) no-repeat
+}
+
+.DK {
+    background: url(../images/DK.svg) no-repeat
+}
+
+.DM {
+    background: url(../images/DM.svg) no-repeat
+}
+
+.DO {
+    background: url(../images/DO.svg) no-repeat
+}
+
+.DZ {
+    background: url(../images/DZ.svg) no-repeat
+}
+
+.EC {
+    background: url(../images/EC.svg) no-repeat
+}
+
+.EE {
+    background: url(../images/EE.svg) no-repeat
+}
+
+.EG {
+    background: url(../images/EG.svg) no-repeat
+}
+
+.ER {
+    background: url(../images/ER.svg) no-repeat
+}
+
+.ES {
+    background: url(../images/ES.svg) no-repeat
+}
+
+.ET {
+    background: url(../images/ET.svg) no-repeat
+}
+
+.EU {
+    background: url(../images/EU.svg) no-repeat
+}
+
+.FI {
+    background: url(../images/FI.svg) no-repeat
+}
+
+.FJ {
+    background: url(../images/FJ.svg) no-repeat
+}
+
+.FK {
+    background: url(../images/FK.svg) no-repeat
+}
+
+.FM {
+    background: url(../images/FM.svg) no-repeat
+}
+
+.FO {
+    background: url(../images/FO.svg) no-repeat
+}
+
+.FR {
+    background: url(../images/FR.svg) no-repeat
+}
+
+.GA {
+    background: url(../images/GA.svg) no-repeat
+}
+
+.GB-ENG {
+    background: url(../images/GB-ENG.svg) no-repeat
+}
+
+.GB-NIR {
+    background: url(../images/GB-NIR.svg) no-repeat
+}
+
+.GB-SCT {
+    background: url(../images/GB-SCT.svg) no-repeat
+}
+
+.GB-WLS {
+    background: url(../images/GB-WLS.svg) no-repeat
+}
+
+.GB-ZET {
+    background: url(../images/GB-ZET.svg) no-repeat
+}
+
+.GB {
+    background: url(../images/GB.svg) no-repeat
+}
+
+.GD {
+    background: url(../images/GD.svg) no-repeat
+}
+
+.GE {
+    background: url(../images/GE.svg) no-repeat
+}
+
+.GF {
+    background: url(../images/GF.svg) no-repeat
+}
+
+.GG {
+    background: url(../images/GG.svg) no-repeat
+}
+
+.GH {
+    background: url(../images/GH.svg) no-repeat
+}
+
+.GI {
+    background: url(../images/GI.svg) no-repeat
+}
+
+.GL {
+    background: url(../images/GL.svg) no-repeat
+}
+
+.GM {
+    background: url(../images/GM.svg) no-repeat
+}
+
+.GN {
+    background: url(../images/GN.svg) no-repeat
+}
+
+.GP {
+    background: url(../images/GP.svg) no-repeat
+}
+
+.GQ {
+    background: url(../images/GQ.svg) no-repeat
+}
+
+.GR {
+    background: url(../images/GR.svg) no-repeat
+}
+
+.GS {
+    background: url(../images/GS.svg) no-repeat
+}
+
+.GT {
+    background: url(../images/GT.svg) no-repeat
+}
+
+.GU {
+    background: url(../images/GU.svg) no-repeat
+}
+
+.GW {
+    background: url(../images/GW.svg) no-repeat
+}
+
+.GY {
+    background: url(../images/GY.svg) no-repeat
+}
+
+.HK {
+    background: url(../images/HK.svg) no-repeat
+}
+
+.HM {
+    background: url(../images/HM.svg) no-repeat
+}
+
+.HN {
+    background: url(../images/HN.svg) no-repeat
+}
+
+.HR {
+    background: url(../images/HR.svg) no-repeat
+}
+
+.HT {
+    background: url(../images/HT.svg) no-repeat
+}
+
+.HU {
+    background: url(../images/HU.svg) no-repeat
+}
+
+.ID {
+    background: url(../images/ID.svg) no-repeat
+}
+
+.IE {
+    background: url(../images/IE.svg) no-repeat
+}
+
+.IL {
+    background: url(../images/IL.svg) no-repeat
+}
+
+.IM {
+    background: url(../images/IM.svg) no-repeat
+}
+
+.IN {
+    background: url(../images/IN.svg) no-repeat
+}
+
+.IO {
+    background: url(../images/IO.svg) no-repeat
+}
+
+.IQ {
+    background: url(../images/IQ.svg) no-repeat
+}
+
+.IR {
+    background: url(../images/IR.svg) no-repeat
+}
+
+.IS {
+    background: url(../images/IS.svg) no-repeat
+}
+
+.IT {
+    background: url(../images/IT.svg) no-repeat
+}
+
+.JE {
+    background: url(../images/JE.svg) no-repeat
+}
+
+.JM {
+    background: url(../images/JM.svg) no-repeat
+}
+
+.JO {
+    background: url(../images/JO.svg) no-repeat
+}
+
+.JP {
+    background: url(../images/JP.svg) no-repeat
+}
+
+.KE {
+    background: url(../images/KE.svg) no-repeat
+}
+
+.KG {
+    background: url(../images/KG.svg) no-repeat
+}
+
+.KH {
+    background: url(../images/KH.svg) no-repeat
+}
+
+.KI {
+    background: url(../images/KI.svg) no-repeat
+}
+
+.KM {
+    background: url(../images/KM.svg) no-repeat
+}
+
+.KN {
+    background: url(../images/KN.svg) no-repeat
+}
+
+.KP {
+    background: url(../images/KP.svg) no-repeat
+}
+
+.KR {
+    background: url(../images/KR.svg) no-repeat
+}
+
+.KW {
+    background: url(../images/KW.svg) no-repeat
+}
+
+.KY {
+    background: url(../images/KY.svg) no-repeat
+}
+
+.KZ {
+    background: url(../images/KZ.svg) no-repeat
+}
+
+.LA {
+    background: url(../images/LA.svg) no-repeat
+}
+
+.LB {
+    background: url(../images/LB.svg) no-repeat
+}
+
+.LC {
+    background: url(../images/LC.svg) no-repeat
+}
+
+.LGBT {
+    background: url(../images/LGBT.svg) no-repeat
+}
+
+.LI {
+    background: url(../images/LI.svg) no-repeat
+}
+
+.LK {
+    background: url(../images/LK.svg) no-repeat
+}
+
+.LR {
+    background: url(../images/LR.svg) no-repeat
+}
+
+.LS {
+    background: url(../images/LS.svg) no-repeat
+}
+
+.LT {
+    background: url(../images/LT.svg) no-repeat
+}
+
+.LU {
+    background: url(../images/LU.svg) no-repeat
+}
+
+.LV {
+    background: url(../images/LV.svg) no-repeat
+}
+
+.LY {
+    background: url(../images/LY.svg) no-repeat
+}
+
+.MA {
+    background: url(../images/MA.svg) no-repeat
+}
+
+.MC {
+    background: url(../images/MC.svg) no-repeat
+}
+
+.MD {
+    background: url(../images/MD.svg) no-repeat
+}
+
+.ME {
+    background: url(../images/ME.svg) no-repeat
+}
+
+.MF {
+    background: url(../images/MF.svg) no-repeat
+}
+
+.MG {
+    background: url(../images/MG.svg) no-repeat
+}
+
+.MH {
+    background: url(../images/MH.svg) no-repeat
+}
+
+.MK {
+    background: url(../images/MK.svg) no-repeat
+}
+
+.ML {
+    background: url(../images/ML.svg) no-repeat
+}
+
+.MM {
+    background: url(../images/MM.svg) no-repeat
+}
+
+.MN {
+    background: url(../images/MN.svg) no-repeat
+}
+
+.MO {
+    background: url(../images/MO.svg) no-repeat
+}
+
+.MP {
+    background: url(../images/MP.svg) no-repeat
+}
+
+.MQ {
+    background: url(../images/MQ.svg) no-repeat
+}
+
+.MR {
+    background: url(../images/MR.svg) no-repeat
+}
+
+.MS {
+    background: url(../images/MS.svg) no-repeat
+}
+
+.MT {
+    background: url(../images/MT.svg) no-repeat
+}
+
+.MU {
+    background: url(../images/MU.svg) no-repeat
+}
+
+.MV {
+    background: url(../images/MV.svg) no-repeat
+}
+
+.MW {
+    background: url(../images/MW.svg) no-repeat
+}
+
+.MX {
+    background: url(../images/MX.svg) no-repeat
+}
+
+.MY {
+    background: url(../images/MY.svg) no-repeat
+}
+
+.MZ {
+    background: url(../images/MZ.svg) no-repeat
+}
+
+.NA {
+    background: url(../images/NA.svg) no-repeat
+}
+
+.NC {
+    background: url(../images/NC.svg) no-repeat
+}
+
+.NE {
+    background: url(../images/NE.svg) no-repeat
+}
+
+.NF {
+    background: url(../images/NF.svg) no-repeat
+}
+
+.NG {
+    background: url(../images/NG.svg) no-repeat
+}
+
+.NI {
+    background: url(../images/NI.svg) no-repeat
+}
+
+.NL {
+    background: url(../images/NL.svg) no-repeat
+}
+
+.NO {
+    background: url(../images/NO.svg) no-repeat
+}
+
+.NP {
+    background: url(../images/NP.svg) no-repeat
+}
+
+.NR {
+    background: url(../images/NR.svg) no-repeat
+}
+
+.NU {
+    background: url(../images/NU.svg) no-repeat
+}
+
+.NZ {
+    background: url(../images/NZ.svg) no-repeat
+}
+
+.OM {
+    background: url(../images/OM.svg) no-repeat
+}
+
+.PA {
+    background: url(../images/PA.svg) no-repeat
+}
+
+.PE {
+    background: url(../images/PE.svg) no-repeat
+}
+
+.PF {
+    background: url(../images/PF.svg) no-repeat
+}
+
+.PG {
+    background: url(../images/PG.svg) no-repeat
+}
+
+.PH {
+    background: url(../images/PH.svg) no-repeat
+}
+
+.PK {
+    background: url(../images/PK.svg) no-repeat
+}
+
+.PL {
+    background: url(../images/PL.svg) no-repeat
+}
+
+.PM {
+    background: url(../images/PM.svg) no-repeat
+}
+
+.PN {
+    background: url(../images/PN.svg) no-repeat
+}
+
+.PR {
+    background: url(../images/PR.svg) no-repeat
+}
+
+.PS {
+    background: url(../images/PS.svg) no-repeat
+}
+
+.PT {
+    background: url(../images/PT.svg) no-repeat
+}
+
+.PW {
+    background: url(../images/PW.svg) no-repeat
+}
+
+.PY {
+    background: url(../images/PY.svg) no-repeat
+}
+
+.QA {
+    background: url(../images/QA.svg) no-repeat
+}
+
+.RE {
+    background: url(../images/RE.svg) no-repeat
+}
+
+.RO {
+    background: url(../images/RO.svg) no-repeat
+}
+
+.RS {
+    background: url(../images/RS.svg) no-repeat
+}
+
+.RU {
+    background: url(../images/RU.svg) no-repeat
+}
+
+.RW {
+    background: url(../images/RW.svg) no-repeat
+}
+
+.SA {
+    background: url(../images/SA.svg) no-repeat
+}
+
+.SB {
+    background: url(../images/SB.svg) no-repeat
+}
+
+.SC {
+    background: url(../images/SC.svg) no-repeat
+}
+
+.SD {
+    background: url(../images/SD.svg) no-repeat
+}
+
+.SE {
+    background: url(../images/SE.svg) no-repeat
+}
+
+.SG {
+    background: url(../images/SG.svg) no-repeat
+}
+
+.SH {
+    background: url(../images/SH.svg) no-repeat
+}
+
+.SI {
+    background: url(../images/SI.svg) no-repeat
+}
+
+.SJ {
+    background: url(../images/SJ.svg) no-repeat
+}
+
+.SK {
+    background: url(../images/SK.svg) no-repeat
+}
+
+.SL {
+    background: url(../images/SL.svg) no-repeat
+}
+
+.SM {
+    background: url(../images/SM.svg) no-repeat
+}
+
+.SN {
+    background: url(../images/SN.svg) no-repeat
+}
+
+.SO {
+    background: url(../images/SO.svg) no-repeat
+}
+
+.SR {
+    background: url(../images/SR.svg) no-repeat
+}
+
+.SS {
+    background: url(../images/SS.svg) no-repeat
+}
+
+.ST {
+    background: url(../images/ST.svg) no-repeat
+}
+
+.SV {
+    background: url(../images/SV.svg) no-repeat
+}
+
+.SX {
+    background: url(../images/SX.svg) no-repeat
+}
+
+.SY {
+    background: url(../images/SY.svg) no-repeat
+}
+
+.SZ {
+    background: url(../images/SZ.svg) no-repeat
+}
+
+.TC {
+    background: url(../images/TC.svg) no-repeat
+}
+
+.TD {
+    background: url(../images/TD.svg) no-repeat
+}
+
+.TF {
+    background: url(../images/TF.svg) no-repeat
+}
+
+.TG {
+    background: url(../images/TG.svg) no-repeat
+}
+
+.TH {
+    background: url(../images/TH.svg) no-repeat
+}
+
+.TJ {
+    background: url(../images/TJ.svg) no-repeat
+}
+
+.TK {
+    background: url(../images/TK.svg) no-repeat
+}
+
+.TL {
+    background: url(../images/TL.svg) no-repeat
+}
+
+.TM {
+    background: url(../images/TM.svg) no-repeat
+}
+
+.TN {
+    background: url(../images/TN.svg) no-repeat
+}
+
+.TO {
+    background: url(../images/TO.svg) no-repeat
+}
+
+.TR {
+    background: url(../images/TR.svg) no-repeat
+}
+
+.TT {
+    background: url(../images/TT.svg) no-repeat
+}
+
+.TV {
+    background: url(../images/TV.svg) no-repeat
+}
+
+.TW {
+    background: url(../images/TW.svg) no-repeat
+}
+
+.TZ {
+    background: url(../images/TZ.svg) no-repeat
+}
+
+.UA {
+    background: url(../images/UA.svg) no-repeat
+}
+
+.UG {
+    background: url(../images/UG.svg) no-repeat
+}
+
+.UM {
+    background: url(../images/UM.svg) no-repeat
+}
+
+.US-CA {
+    background: url(../images/US-CA.svg) no-repeat
+}
+
+.US {
+    background: url(../images/US.svg) no-repeat
+}
+
+.UY {
+    background: url(../images/UY.svg) no-repeat
+}
+
+.UZ {
+    background: url(../images/UZ.svg) no-repeat
+}
+
+.VA {
+    background: url(../images/VA.svg) no-repeat
+}
+
+.VC {
+    background: url(../images/VC.svg) no-repeat
+}
+
+.VE {
+    background: url(../images/VE.svg) no-repeat
+}
+
+.VG {
+    background: url(../images/VG.svg) no-repeat
+}
+
+.VI {
+    background: url(../images/VI.svg) no-repeat
+}
+
+.VN {
+    background: url(../images/VN.svg) no-repeat
+}
+
+.VU {
+    background: url(../images/VU.svg) no-repeat
+}
+
+.WF {
+    background: url(../images/WF.svg) no-repeat
+}
+
+.WS {
+    background: url(../images/WS.svg) no-repeat
+}
+
+.XK {
+    background: url(../images/XK.svg) no-repeat
+}
+
+.YE {
+    background: url(../images/YE.svg) no-repeat
+}
+
+.YT {
+    background: url(../images/YT.svg) no-repeat
+}
+
+.ZA {
+    background: url(../images/ZA.svg) no-repeat
+}
+
+.ZM {
+    background: url(../images/ZM.svg) no-repeat
+}
+
+.ZW {
+    background: url(../images/ZW.svg) no-repeat
+}
+
+.dropdown-menu .dropdown-menu-header, .dropdown-menu .menu-header-image, .dropdown-menu .dropdown-menu-header-inner {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.dropdown-menu-header {
+    color: #fff;
+    margin-top: -0.65rem;
+    margin-bottom: 0.65rem;
+    position: relative;
+    z-index: 6;
+}
+
+.pt-4, .py-4 {
+    padding-top: 1.5rem !important;
+}
+.pb-4, .py-4 {
+    padding-bottom: 1.5rem !important;
+}
+.dropdown-menu .dropdown-menu-header, .dropdown-menu .menu-header-image, .dropdown-menu .dropdown-menu-header-inner {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+.dropdown-menu-header .dropdown-menu-header-inner {
+    margin: -1px -1px 0;
+    padding: 1.5rem 0.5rem;
+    position: relative;
+}
+
+
+.dropdown-menu-language {
+    width: 15rem !important;
+}
+.dropdown-item-language {
+    padding: 0.4rem 1rem !important;
+}
+
+.card-primary.card-outline {
+    border-top: 3px solid #216499;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+.profile-user-img {
+    border: 3px solid #adb5bd;
+    margin: 0 auto;
+    padding: 3px;
+    width: 100px;
+}
+.img-circle {
+    border-radius: 50%;
+}
+
+.status_btn {
+    display: inline-block;
+    padding: 5px 15px;
+    font-size: 11px;
+    font-weight: 300;
+    color: #fff !important;
+    background: #05d34e;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    min-width: 70px;
+    text-align: center;
+}
+.status_active {
+    background: #05d34e;
+}
+.status_inactive {
+    background: #d30505;
+}
+
+.text-vertical-center {
+    display: flex;
+    align-items: center;
+}
+
+.mtb-permissions {
+    margin-bottom: 1.3rem !important;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.hidden-text-nowrap {
+    max-width: 300px;
+    padding-right: 25px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+.form-login {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+    border-bottom: 1px solid #626262;
+}
+
+.form-login:focus {
+    border-bottom: 1px solid #216499;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.app-sidebar {
+    width: 260px;
+    min-width: 260px;
+}
+.app-header__logo {
+    width: 260px;
+}
+.fixed-sidebar .app-main .app-main__outer {
+    padding-left: 260px;
+}
+.app-main .app-main__inner {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+.app-page-title {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: -15px;
+    margin-left: -15px;
+    margin-top: -15px;
+}
+.app-sidebar .app-sidebar__inner {
+    padding: 2px 0.8rem 1rem;
+}
+.closed-sidebar.fixed-sidebar .app-main__outer {
+    padding-left: 80px !important;
+}
+
+#btn_go_login_basic {
+    color: #50b6e2;
+}
+#btn_go_login_basic:hover {
+    color: #138ecc;
+}
+
+
+
+
+
+.custom-select, input.form-control {
+    height: calc(2rem + 2px) !important;
+}
+
+.custom-select:disabled {
+    color: #000000;
+    background-color: #e9ecef;
+}
+
+.custom-input {
+    height: calc(2rem + 2px) !important;
+    font-size: 11px;
+}
+
+.btn-iconv2 {
+    display: block;
+    margin: 0 !important;
+    line-height: 1.8;
+    font-size: 0.8rem;
+}
+
+.btn-iconv3 {
+    display: block;
+    margin: 0 !important;
+    margin-right: 2px !important;
+    line-height: 1.5;
+    font-size: 0.8rem;
+}
+
+thead > tr > th {
+    vertical-align: middle !important;
+}
+
+/* COLORES */
+.hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    background-color: #32aade;
+}
+
+.bg-primary2 {
+    background: #216499;
+    background: -webkit-linear-gradient(125deg, #094778, #49affe);
+    background: linear-gradient(125deg, #094778, #49affe);
+}
+
+.app-sidebar.sidebar-text-light .app-sidebar__heading {
+    color: #fff;
+}
+
+.app-sidebar.sidebar-text-light .vertical-nav-menu li a {
+    color: #fff;
+}
+
+.app-sidebar.sidebar-text-light .vertical-nav-menu li a {
+    color: #fff;
+}
+
+.coorp-color1 {
+    color: #216499 !important;
+}
+
+.coorp-color2 {
+    color: #32aade !important;
+}
+
+.coorp-color3 {
+    color: #ffb909 !important;
+}
+
+.login-mode {
+    padding: 0 !important;
+}
+
+.bg-image {
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+
+.btn-warning-2 {
+    color: #ffffff;
+    background-color: #1b6ec2;
+    border-color: #1b6ec2;
+}
+
+.ui-widget-header {
+    font-size: 14px;
+    background-color: #216499;
+    color: #fff;
+    font-weight: normal;
+}
+
+.ui-dialog .ui-dialog-titlebar-close span {
+    filter: invert(1);
+}
+
+.ui-dialog .ui-dialog-buttonpane button {
+    border: 1px solid #216499;
+    background: #216499;
+    color: #ffffff;
+}
+
+.app-sidebar.sidebar-text-light .vertical-nav-menu ul:before {
+    background-color: transparent;
+}
+
+.btn-transparent {
+    background-color: transparent;
+    color: #000000;
+    border-color: transparent;
+}
+.btn-transparent:hover {
+    background-color: transparent;
+    color: #000000;
+    border-color: transparent;
+}
+.btn-transparent:focus {
+    background-color: transparent !important;
+    color: #000000 !important;
+    border-color: transparent !important;
+}
+
+.btn-transparent.disabled, .btn-transparent:disabled {
+    background-color: transparent !important;
+    color: #000000 !important;
+    border-color: transparent !important;
+}
+
+.block-float-select {
+    float: right;
+}
+
+.float-select {
+    width: auto;
+    position: absolute;
+    z-index: 99;
+    display: inline-block;
+    -moz-transform: translate(-100%, 20%);
+    -ms-transform: translate(-100%, 20%);
+    -webkit-transform: translate(-100%, 20%);
+    -o-transform: translate(-100%, 20%);
+    transform: translate(-100%, 20%);
+}
+
+#factkpi_datatable_length > label > select {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+table.table-bordered.dataTable th {
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+table.dataTable thead .sorting:after, 
+table.dataTable thead .sorting_asc:after, 
+table.dataTable thead .sorting_desc:after, 
+table.dataTable thead .sorting_asc_disabled:after, 
+table.dataTable thead .sorting_desc_disabled:after {
+    bottom: 15px;
+}
+
+#factkpi_datatable_wrapper > div:nth-child(1) {
+    width: 100%;
+}
+#factkpi_datatable_wrapper > div:nth-child(3) {
+    width: 100%;
+}
+
+#factkpi_datatable_wrapper > div:nth-child(1) > div:nth-child(1) {
+    justify-content: flex-start;
+    display: flex;
+}
+
+#factkpi_datatable_wrapper > div:nth-child(1) > div:nth-child(2) {
+    justify-content: flex-end;
+    display: flex;
+}
+
+#factkpi_datatable_paginate {
+    justify-content: flex-end;
+    display: flex;
+}
+
+#dashboardContainer > iframe {
+    border: none;
+}
+
+.wfe-loading {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+
+#pbi-svg-loading .microsoft-svg-item, #pbi-svg-loading .pbi-svg-item {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    opacity: 1;
+    z-index: 4;
+    transition: opacity .5s;
+    max-width: 200px;
+}
+
+.shine {
+    background: linear-gradient(15deg,rgba(255,255,255,0) 0,rgba(255,255,255,.1) 35%,rgba(255,255,255,.2) 55%,rgba(255,255,255,.1) 75%,rgba(255,255,255,0) 100%);
+    animation: pbi-logo-animation 1.3s cubic-bezier(.91,.88,0,1.22) 0s infinite;
+    width: 61px;
+    height: 31px;
+}
+@keyframes pbi-logo-animation {
+    0% {
+        transform: translateY(-30%)
+    }
+
+    100% {
+        transform: translateY(-350%)
+    }
+}
+#pbi-svg-loading .pbi-svg-item img, #pbi-svg-loading .pbi-svg-item object {
+    width: 61px;
+    height: 81px;
+}

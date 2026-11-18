@@ -1,0 +1,133 @@
+﻿@model WebApplication.Controllers.ReportSettingController.GroupIndexModel;
+@inject LanguageService language;
+@{
+    ViewData["Title"] = language.Getkey("conf_reportsetting_title");
+
+    var ValueA = Model.CollectionA.Rows;
+    var ValueB = Model.CollectionB.Rows;
+}
+
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                @language.Getkey("conf_reportsetting_title")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <h5 class="card-title">@language.Getkey("activity_name")</h5>
+        <div class="row">
+            <div class="col">
+                <ul class="nav flex-column">
+                    <li class="nav-item-btn nav-item">
+                        <button id="rese_add_new_row" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-plus"> </i> @language.Getkey("btn_add")</button>
+                        <button id="rese_save_new_rows" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-diskette"> </i> @language.Getkey("btn_save")</button>
+                        <button id="rese_cancel_new_rows" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-close-circle"> </i> @language.Getkey("btn_cancel")</button>
+                        <button id="rese_refresh_rows" onClick="refresh_rese_table()" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-refresh"> </i> @language.Getkey("btn_refresh")</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">@language.Getkey("conf_reportsetting_table_name")</h5>
+                <table class="mb-0 table table-hover table-bordered">
+                    <thead style="font-size: 12px;">
+                        <tr>
+                            <th>@language.Getkey("table_col_number")</th>
+                            <th>@language.Getkey("conf_reportsetting_column_name_1")</th>
+                            <th>@language.Getkey("conf_reportsetting_column_name_2")</th>
+                            <th>@language.Getkey("conf_reportsetting_column_name_3")</th>
+                            <th>@language.Getkey("conf_reportsetting_column_name_4")</th>
+                            <th>@language.Getkey("conf_reportsetting_column_name_5")</th>
+                            <th>@language.Getkey("conf_reportsetting_column_name_6")</th>
+                            <th>@language.Getkey("conf_reportsetting_column_name_7")</th>
+                            <th style="width: 84px;">@language.Getkey("table_col_actions")</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rese_rows_list">
+                        @for (int i = 0; i < ValueA.Count; i++)
+                        {
+                            <tr>
+                                <th scope="row" id="row_rese_@(i + 1)_id" data-value="@ValueA[i]["Id"]">@(i + 1)</th>
+                                <td style="padding: 2px;"><input id="row_rese_@(i + 1)_menu_name_en" type="text" class="form-control" value="@ValueA[i]["ReportEnMenuName"]" disabled="disabled"></td>
+                                <td style="padding: 2px;"><input id="row_rese_@(i + 1)_menu_name_es" type="text" class="form-control" value="@ValueA[i]["ReportEsMenuName"]" disabled="disabled"></td>
+                                <td style="padding: 2px;"><input id="row_rese_@(i + 1)_name_en" type="text" class="form-control" value="@ValueA[i]["ReportEnName"]" disabled="disabled"></td>
+                                <td style="padding: 2px;"><input id="row_rese_@(i + 1)_url_en" type="text" class="form-control" value="@ValueA[i]["ReportEnURL"]" disabled="disabled"></td>
+                                <td style="padding: 2px;"><input id="row_rese_@(i + 1)_name_sp" type="text" class="form-control" value="@ValueA[i]["ReportEsName"]" disabled="disabled"></td>
+                                <td style="padding: 2px;"><input id="row_rese_@(i + 1)_url_sp" type="text" class="form-control" value="@ValueA[i]["ReportEsURL"]" disabled="disabled"></td>
+                                <td style="padding: 2px;">
+                                    <select type="select" id="row_rese_@(i + 1)_module" class="custom-select" style="background: none; background-color: #e9ecef;" disabled="disabled">
+                                        @for (int j = 0; j < ValueB.Count; j++)
+                                        {
+                                            if (ValueA[i]["IdModuleNum"].ToString() == ValueB[j]["IdNum"].ToString())
+                                            {
+                                                <option value="@ValueB[j]["Id"]" selected="selected">@(language.Getkey("language_short") == "es" ? ValueB[j]["ModuleName_ES"] : ValueB[j]["ModuleName_EN"])</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@ValueB[j]["Id"]">@(language.Getkey("language_short") == "es" ? ValueB[j]["ModuleName_ES"] : ValueB[j]["ModuleName_EN"])</option>
+                                            }
+                                        }
+                                    </select>
+                                </td>
+                                <td style="padding: 2px;">
+                                    <div class="input-group">
+                                        <button type="button" id="row_rese_btn_@(i + 1)_edr" onClick="edit_rese_row(@(i + 1))" class="btn btn-primary btn-iconv2" style="margin-right: 2px !important;"><i class="fa fa-pen fa-w-16 fa-1x"></i></button>
+                                        <button type="button" id="row_rese_btn_@(i + 1)_rcr" onClick="realizar_cambios_rese_row(@(i + 1))" data-actived="0" class="btn btn-success btn-iconv2" style="margin-right: 2px !important; display: none; font-size: 0.7rem;"><i class="fa fa-edit fa-w-16 fa-1x"></i></button>
+                                        <button type="button" id="row_rese_btn_@(i + 1)_ccr" onClick="cancelar_cambios_rese_row(@(i + 1))" data-actived="0" class="btn btn-secondary btn-iconv2" style="margin-right: 2px !important; display: none;"><i class="fa fa-times fa-w-16 fa-1x"></i></button>
+                                        <button type="button" id="row_rese_btn_@(i + 1)_der" onClick="delete_rese_row('@(i + 1). @ValueA[i]["ReportEnName"]', @(i + 1))" class="btn btn-primary btn-iconv2"><i class="fa fa-trash fa-w-16 fa-1x"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                            
+
+                        <tr id="rese_row_example_hidden" style="display: none;">
+                            <th scope="row" id="row_rese_new_id">-</th>
+                            <td style="padding: 2px;"><input id="row_rese_new_menu_name_en" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"><input id="row_rese_new_menu_name_es" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"><input id="row_rese_new_name_en" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"><input id="row_rese_new_url_en" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"><input id="row_rese_new_name_sp" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"><input id="row_rese_new_url_sp" type="text" class="form-control"></td>
+                            <td style="padding: 2px;">
+                                <select type="select" id="row_rese_new_module" class="custom-select">
+                                    @for (int j = 0; j < ValueB.Count; j++)
+                                    {
+                                        <option value="@ValueB[j]["Id"]">@(language.Getkey("language_short") == "es" ? ValueB[j]["ModuleName_ES"] : ValueB[j]["ModuleName_EN"])</option>
+                                    }
+                                </select>
+                            </td>
+                            <td style="padding: 2px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+

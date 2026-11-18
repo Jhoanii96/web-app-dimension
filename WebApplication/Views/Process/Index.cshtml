@@ -1,0 +1,253 @@
+﻿@model WebApplication.Controllers.ProcessController.GroupIndexModel;
+@inject LanguageService language;
+@{
+    ViewData["Title"] = language.Getkey("dimension_process_title");
+
+    var ValueA = Model.CollectionA.Rows;
+    var ValueB = Model.CollectionB.Rows;
+}
+
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                @language.Getkey("dimension_process_title")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <h5 class="card-title">@language.Getkey("configuration_name")</h5>
+        <div class="row">
+            <div class="col">
+                <ul class="nav flex-column">
+                    <li class="nav-item-header nav-item">@language.Getkey("filter_name")</li>
+                </ul>
+                <div class="row">
+                    <div class="col">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <span class="nav-link coorp-color2" style="cursor: auto; padding-bottom: 0;">
+                                    @language.Getkey("dimension_process_sarea")
+                                </span>
+                            </li>
+                            <li>
+                                <div style="margin: 0.5rem 1rem;">
+                                    <select type="select" id="proc_filter_sarea" class="custom-select">
+                                        <option value="All" selected="selected">@language.Getkey("dropdown_all")</option>
+                                        @for (int i = 0; i < ValueB.Count; i++)
+                                        {
+                                            <option value="@ValueB[i]["Id"]">@(ValueB[i]["AreaName"] + ": " + ValueB[i]["SAreaName"])</option>
+                                        }
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+                <ul class="nav flex-column">
+                    <li class="nav-item-header nav-item">@language.Getkey("activity_name")</li>
+                    <li class="nav-item">
+                        <a id="proc_list_add_edit_sarea" class="nav-link coorp-color2" data-toggle="modal" data-target="#modal_proc_sarea">
+                            <i class="nav-link-icon pe-7s-pen"> </i><span>@language.Getkey("dimension_process_add_or_edit_sarea")</span>
+                        </a>
+                    </li>
+                    <li class="nav-item-divider nav-item"></li>
+                    <li class="nav-item-btn nav-item">
+                        <button id="proc_add_new_row" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-plus"> </i> @language.Getkey("btn_add")</button>
+                        <button id="proc_save_new_rows" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-diskette"> </i> @language.Getkey("btn_save")</button>
+                        <button id="proc_cancel_new_rows" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-close-circle"> </i> @language.Getkey("btn_cancel")</button>
+                        <button id="proc_refresh_rows" onClick="refresh_proc_table()" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-refresh"> </i> @language.Getkey("btn_refresh")</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">@language.Getkey("dimension_process_table_name")</h5>
+                <table class="mb-0 table table-hover table-bordered">
+                    <thead style="font-size: 12px;">
+                        <tr>
+                            <th>@language.Getkey("table_col_number")</th>
+                            <th>@language.Getkey("dimension_process_column_name_1")</th>
+                            <th>@language.Getkey("dimension_process_column_name_2")</th>
+                            <th style="width: 84px;">@language.Getkey("table_col_actions")</th>
+                        </tr>
+                    </thead>
+                    <tbody id="proc_rows_list">
+                        @for (int i = 0; i < ValueA.Count; i++)
+                        {
+                            <tr>
+                                <th scope="row" id="row_proc_@(i + 1)_id" data-value="@ValueA[i]["Id"]">@(i + 1)</th>
+                                <td style="padding: 2px;">
+                                    <select type="select" id="row_proc_@(i + 1)_sarea" class="custom-select" style="background: none; background-color: #e9ecef;" disabled="disabled">
+                                        @for (int j = 0; j < ValueB.Count; j++)
+                                        {
+                                            if (ValueA[i]["IdSAreaNum"].ToString() == ValueB[j]["IdNum"].ToString())
+                                            {
+                                                <option value="@ValueB[j]["Id"]" selected="selected">@(ValueB[j]["AreaName"] + ": " + ValueB[j]["SAreaName"])</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@ValueB[j]["Id"]">@(ValueB[j]["AreaName"] + ": " + ValueB[j]["SAreaName"])</option>
+                                            }
+                                        }
+                                    </select>
+                                </td>
+                                <td style="padding: 2px;"><input id="row_proc_@(i + 1)_name" type="text" class="form-control" value="@ValueA[i]["ProcessName"]" disabled="disabled"></td>
+                                <td style="padding: 2px;">
+                                    <div class="input-group">
+                                        <button type="button" id="row_proc_btn_@(i + 1)_edr" onClick="edit_process_row(@(i + 1))" class="btn btn-primary btn-iconv2" style="margin-right: 2px !important;"><i class="fa fa-pen fa-w-16 fa-1x"></i></button>
+                                        <button type="button" id="row_proc_btn_@(i + 1)_rcr" onClick="realizar_cambios_process_row(@(i + 1))" data-actived="0" class="btn btn-success btn-iconv2" style="margin-right: 2px !important; display: none; font-size: 0.7rem;"><i class="fa fa-edit fa-w-16 fa-1x"></i></button>
+                                        <button type="button" id="row_proc_btn_@(i + 1)_ccr" onClick="cancelar_cambios_process_row(@(i + 1))" data-actived="0" class="btn btn-secondary btn-iconv2" style="margin-right: 2px !important; display: none;"><i class="fa fa-times fa-w-16 fa-1x"></i></button>
+                                        <button type="button" id="row_proc_btn_@(i + 1)_der" onClick="delete_process_row('@(i + 1). @ValueA[i]["ProcessName"]', @(i + 1))" class="btn btn-primary btn-iconv2"><i class="fa fa-trash fa-w-16 fa-1x"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                        <tr id="proc_row_example_hidden" style="display: none;">
+                            <th scope="row" id="row_proc_new_id">-</th>
+                            <td style="padding: 2px;">
+                                <select type="select" id="row_proc_new_sarea" class="custom-select">
+                                    @for (int j = 0; j < ValueB.Count; j++)
+                                    {
+                                        <option value="@ValueB[j]["Id"]">@(ValueB[j]["AreaName"] + ": " + ValueB[j]["SAreaName"])</option>
+                                    }
+                                </select>
+                            </td>
+                            <td style="padding: 2px;"><input id="row_proc_new_name" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+@section ModalsProcess
+{
+
+<!-- Modal 4 PROC - SUBAREA -->
+<div class="modal fade" id="modal_proc_sarea" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>@language.Getkey("modal_add_or_edit_sarea")
+                <div class="btn-actions-pane-right">
+                    <div role="group" class="btn-group-sm nav btn-group">
+                        <a data-toggle="tab" href="#tab-sarea-0" class="btn-shadow active btn btn-primary">@language.Getkey("btn_add")</a>
+                        <a data-toggle="tab" href="#tab-sarea-1" class="btn-shadow  btn btn-primary">@language.Getkey("btn_edit")</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="data_loading_sarea" style="display: block; margin: auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <rect x="40" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.1388888888888889s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.2777777777777778s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.9722222222222222s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.41666666666666663s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.8333333333333333s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.6944444444444444s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.5555555555555556s" calcMode="discrete"></animate>
+                    </rect>
+                </svg>
+            </div>
+            <div id="data_list_sarea" class="card-body" style="display: none;">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-sarea-0" role="tabpanel">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <div class="input-group" style="margin-bottom: 15px;">
+                                    <input type="text" id="proc_area_name_add_new" placeholder="@language.Getkey("modal_sarea_input_name_1")" class="form-control">
+                                    <input type="text" id="proc_sarea_name_add_new" placeholder="@language.Getkey("modal_sarea_input_name_2")" class="form-control">
+                                    <div class="input-group-append">
+                                        <button id="btn_proc_sarea_add_new" onclick="btn_proc_sarea_add_new()" class="btn btn-primary">@language.Getkey("btn_add")</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item-divider nav-item"></li>
+                            <li class="nav-item-btn nav-item" style="padding: 0.5rem 0;">
+                                <div id="proc_list_add_sarea" style="max-height: 200px; overflow: auto; border: 1px #a1a1a1 solid; padding: 7px;">
+                                    <p style="margin-bottom: 0.3rem;">1. TOTAL ORE</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="tab-sarea-1" role="tabpanel" style="max-height: 325px; overflow: auto;">
+                        <h5 class="card-title">@language.Getkey("modal_sarea_title_table")</h5>
+                        <table class="mb-0 table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@language.Getkey("table_col_number")</th>
+                                    <th>@language.Getkey("modal_sarea_column_name_1")</th>
+                                    <th>@language.Getkey("modal_sarea_column_name_2")</th>
+                                    <th style="width: 85px;">@language.Getkey("table_col_actions")</th>
+                                </tr>
+                            </thead>
+                            <tbody id="proc_list_edit_sarea">
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td style="padding: 2px;"><input type="text" class="form-control custom-input" value="ORE TO CRUSHER"></td>
+                                    <td style="padding: 2px;">
+                                        <div class="input-group">
+                                            <button type="button" class="mb-2 mr-2 btn btn-success btn-iconv3"><i class="fa fa-pen fa-w-16 fa-1x"></i></button>
+                                            <button type="button" class="mb-2 mr-2 btn btn-danger btn-iconv3"><i class="fa fa-trash fa-w-16 fa-1x"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@language.Getkey("btn_close")</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+}
+
+

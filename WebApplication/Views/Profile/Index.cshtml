@@ -1,0 +1,138 @@
+﻿@using static WebApplication.Models.EncryptDecryptService;
+@model WebApplication.Controllers.ProfileController.GroupIndexModel;
+@inject LanguageService language;
+@{
+    ViewData["Title"] = language.Getkey("conf_profile_title");
+
+    var DataUser = Model.CollectionA.Rows;
+    string IdUser = EncryptString(DataUser[0]["IdUser"].ToString());
+    string DisplayName = DataUser[0]["DisplayName"].ToString();
+    string Surname = DataUser[0]["Surname"].ToString();
+    string UserPrincipalName = DataUser[0]["UserPrincipalName"].ToString();
+    bool MicrosoftRegistered = Convert.ToBoolean(DataUser[0]["MicrosoftRegistered"]);
+    bool ShowName = Convert.ToBoolean(DataUser[0]["ShowName"]);
+    string FirstName = DataUser[0]["FirstName"].ToString();
+    string LastName = DataUser[0]["LastName"].ToString();
+    string ModuleName_EN = DataUser[0]["ModuleName_EN"].ToString();
+    string ModuleName_ES = DataUser[0]["ModuleName_ES"].ToString();
+    bool UserEnabled = Convert.ToBoolean(DataUser[0]["Enabled"]);
+    int[] IdsModule = (DataUser[0]["IdNumModule"].ToString()).Split(',').Select(Int32.Parse).ToArray();
+    string PhotoProfile = (string.IsNullOrEmpty(DataUser[0]["PhotoPath"].ToString()) ? "normal.jpg" : DataUser[0]["PhotoPath"].ToString());
+    string DateCreated = Convert.ToDateTime(DataUser[0]["DateCreated"].ToString()).ToString("F");
+
+}
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle" src="/images/avatars/@PhotoProfile" alt="User profile picture" style="width: 100px; height: 100px; object-fit: cover;">
+                        </div>
+                        <h3 class="profile-username text-center">@(MicrosoftRegistered ? (DisplayName + " " + Surname) : (FirstName + " " + LastName))</h3>
+                        <p class="text-muted text-center">@UserPrincipalName</p>
+                    </div>
+
+                </div>
+
+
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">@language.Getkey("conf_profile_about_me")</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <strong><i class="fas fa-calendar mr-1"></i> @language.Getkey("conf_profile_account_created")</strong>
+                        <p class="text-muted">
+                            @DateCreated
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <span style="margin-left: 10px;">@language.Getkey("conf_profile_personal_information")</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+
+                            <div class="tab-pane active" id="settings">
+                                <form class="form-horizontal">
+                                    <div class="form-group row">
+                                        <label for="inputNameProfile" class="col-sm-2 col-form-label">@language.Getkey("conf_profile_input_name_1")</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputNameProfile" data-am="@MicrosoftRegistered" placeholder="@language.Getkey("conf_profile_input_name_1")" value="@(MicrosoftRegistered ? DisplayName : FirstName)" @(MicrosoftRegistered ? "disabled=\"disabled\"" : "")>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputLastNameProfile" class="col-sm-2 col-form-label">@language.Getkey("conf_profile_input_name_2")</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputLastNameProfile" data-am="@MicrosoftRegistered" placeholder="@language.Getkey("conf_profile_input_name_2")" value="@(MicrosoftRegistered ? Surname : LastName)" @(MicrosoftRegistered ? "disabled=\"disabled\"" : "")>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmailProfile" class="col-sm-2 col-form-label">@language.Getkey("conf_profile_input_name_3")</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" class="form-control" id="inputEmailProfile" placeholder="@language.Getkey("conf_profile_input_name_3")" value="@UserPrincipalName" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputPermissionProfile" class="col-sm-2 col-form-label">@language.Getkey("conf_profile_input_name_4")</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputPermissionProfile" value="@(language.Getkey("language_short") == "es" ? ModuleName_ES : ModuleName_EN)" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="inputShowNameProfile" @(ShowName ? "checked=\"checked\"" : "")> @language.Getkey("conf_profile_input_name_5")
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="avatar" class="col-sm-2 col-form-label">@language.Getkey("conf_profile_input_name_6")</label>
+                                        <div class="col-sm-10">
+                                            <input style="display: none" type="text" id="uploadFile" name="textImage" readonly />
+                                            <input type="file" id="photoInputFile" name="image" accept="image/png,image/jpeg" style="margin-top: 4px;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-10" style="width: 300px;">
+                                            <img id="mypic" height="200" src="/images/avatars/@PhotoProfile" alt="My picture" style="border-radius: 1%;">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                            <button type="button" id="btn_update_profile" class="btn btn-primary">@language.Getkey("btn_update")</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+

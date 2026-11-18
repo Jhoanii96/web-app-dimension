@@ -1,0 +1,545 @@
+﻿@model WebApplication.Controllers.KPIScenarioController.GroupIndexModel;
+@inject LanguageService language;
+@{
+    ViewData["Title"] = language.Getkey("dimension_kpisce_title");
+
+    var ValueA = Model.CollectionA.Rows;
+    var ValueB = Model.CollectionB.Rows;
+    var ValueC = Model.CollectionC.Rows;
+}
+
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                @language.Getkey("dimension_kpisce_title")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <h5 class="card-title">@language.Getkey("configuration_name")</h5>
+        <div class="row">
+            <div class="col">
+                <ul class="nav flex-column">
+                    <li class="nav-item-header nav-item">@language.Getkey("filter_name")</li>
+                </ul>
+                <div class="row">
+                    <div class="col">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <span class="nav-link coorp-color2" style="cursor: auto; padding-bottom: 0;">
+                                    @language.Getkey("dimension_kpisce_kpi")
+                                </span>
+                            </li>
+                            <li>
+                                <div style="margin: 0.5rem 1rem;">
+                                    <select type="select" id="kpisce_filter_kpi" class="custom-select">
+                                        <option value="All" selected="selected">@language.Getkey("dropdown_all")</option>
+                                        @for (int i = 0; i < ValueB.Count; i++)
+                                        {
+                                            <option value="@ValueB[i]["Id"]">@(ValueB[i]["CategoryName"] + ": " + language.Getkey("language_short") == "es" ? ValueB[i]["KPINameEs"] : ValueB[i]["KPINameEn"])</option>
+                                        }
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <span class="nav-link coorp-color2" style="cursor: auto; padding-bottom: 0;">
+                                    @language.Getkey("dimension_kpisce_sosy")
+                                </span>
+                            </li>
+                            <li>
+                                <div style="margin: 0.5rem 1rem;">
+                                    <select type="select" id="kpisce_filter_source" class="custom-select">
+                                        <option value="All" selected="selected">@language.Getkey("dropdown_all")</option>
+                                        @for (int i = 0; i < ValueC.Count; i++)
+                                        {
+                                            <option value="@ValueC[i]["Id"]">@ValueC[i]["SourceName"]</option>
+                                        }
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+                <ul class="nav flex-column">
+                    <li class="nav-item-header nav-item">@language.Getkey("activity_name")</li>
+                    <li class="nav-item">
+                        <a id="kpisce_list_add_edit_source" class="nav-link coorp-color2" data-toggle="modal" data-target="#ModalSource">
+                            <i class="nav-link-icon pe-7s-pen"> </i><span>@language.Getkey("dimension_kpisce_add_or_edit_sosy")</span>
+                        </a>
+                    </li>
+                    <li class="nav-item-divider nav-item"></li>
+                    <li class="nav-item-btn nav-item">
+                        <button id="kpisce_add_new_row" class="btn-pill btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal_add_KPI_Scenario"><i class="nav-link-icon pe-7s-plus"> </i> @language.Getkey("btn_add")</button>
+                        <button id="kpisce_refresh_rows" onClick="refresh_kpisce_table()" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-refresh"> </i> @language.Getkey("btn_refresh")</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">KPI Scenario List</h5>
+                <table class="mb-0 table table-hover table-bordered">
+                    <thead style="font-size: 12px;">
+                        <tr>
+                            <th style="width: 250px;">@language.Getkey("dimension_kpisce_column_name_1")</th>
+                            <th style="width: 100px;">@language.Getkey("dimension_kpisce_column_name_2")</th>
+                            <th style="width: 150px;">@language.Getkey("dimension_kpisce_column_name_3")</th>
+                            <th style="width: 75px;">@language.Getkey("dimension_kpisce_column_name_4")</th>
+                            <th style="width: 125px;">@language.Getkey("dimension_kpisce_column_name_5")</th>
+                            <th style="width: 125px;">@language.Getkey("dimension_kpisce_column_name_6")</th>
+                            <th>@language.Getkey("dimension_kpisce_column_name_7")</th>
+                            <th style="width: 85px;">@language.Getkey("dimension_kpisce_column_name_8")</th>
+                            <th style="width: 84px;">@language.Getkey("table_col_actions")</th>
+                        </tr>
+                    </thead>
+                    <tbody id="kpisce_rows_list">
+                        @for (int i = 0; i < ValueA.Count; i++)
+			            {
+                        <tr>
+                            <th scope="row" id="row_kpisce_@(i + 1)_id" data-value="@ValueA[i]["IdScenario"]" style="display: none;">@(i + 1)</th>
+                            <td style="padding: 2px;">
+                                <select type="select" id="row_kpisce_@(i + 1)_kpi" class="custom-select" style="background: none; background-color: #e9ecef;" disabled>
+                                    @for (int j = 0; j < ValueB.Count; j++)
+                                    {
+                                        if (ValueA[i]["IdKPINum"].ToString() == ValueB[j]["IdNum"].ToString())
+                                        {
+                                            <option value="@ValueB[j]["Id"]" selected="selected">@(ValueB[j]["CategoryName"] + ": " + language.Getkey("language_short") == "es" ? ValueB[j]["KPINameEs"] : ValueB[j]["KPINameEn"])</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@ValueB[j]["Id"]">@(ValueB[j]["CategoryName"] + ": " + language.Getkey("language_short") == "es" ? ValueB[j]["KPINameEs"] : ValueB[j]["KPINameEn"])</option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <td style="padding: 2px;">
+                                <select type="select" id="row_kpisce_@(i + 1)_source" class="custom-select" style="background: none; background-color: #e9ecef;" disabled>
+                                    @for (int k = 0; k < ValueC.Count; k++)
+                                    {
+                                        if (ValueA[i]["IdSourceNum"].ToString() == ValueC[k]["IdNum"].ToString())
+                                        {
+                                            <option value="@ValueC[k]["Id"]" selected="selected">@ValueC[k]["SourceName"]</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@ValueC[k]["Id"]">@ValueC[k]["SourceName"]</option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <td style="padding: 2px;"><input id="row_kpisce_@(i + 1)_table_name" type="text" class="form-control" value="@ValueA[i]["TableName"]" disabled="disabled"></td>
+                            <td style="padding: 2px;"><input id="row_kpisce_@(i + 1)_column_name_date" type="text" class="form-control" value="@ValueA[i]["ColumnNameDate"]" disabled="disabled"></td>
+                            <td style="padding: 2px;"><input id="row_kpisce_@(i + 1)_column_name_shift" type="text" class="form-control" value="@ValueA[i]["ColumnNameShift"]" disabled="disabled"></td>
+                            <td style="padding: 2px;"><input id="row_kpisce_@(i + 1)_column_name_value" type="text" class="form-control" value="@ValueA[i]["ColumnNameValue"]" disabled="disabled"></td>
+                            <td style="padding: 2px;"><input id="row_kpisce_@(i + 1)_filter_additional" type="text" class="form-control" value="@ValueA[i]["FilterAdditional"]" disabled="disabled"></td>
+                            <td style="padding: 2px;"><input id="row_kpisce_@(i + 1)_parameters" type="text" class="form-control" value="@ValueA[i]["Parameters"]" disabled="disabled"></td>
+                            <td style="padding: 2px;">
+                                <div class="input-group">
+                                    <button type="button" id="row_kpisce_btn_@(i + 1)_edr" onClick="edit_kpisce_row(@(i + 1))" data-toggle="modal" data-target="#Modal_edit_KPI_Scenario" class="btn btn-primary btn-iconv2" style="margin-right: 2px !important;"><i class="fa fa-pen fa-w-16 fa-1x"></i></button>
+                                    <button type="button" id="row_kpisce_btn_@(i + 1)_der" onClick="delete_kpisce_row('@(i + 1). @ValueA[i]["TableName"]', @(i + 1))" class="btn btn-primary btn-iconv2"><i class="fa fa-trash fa-w-16 fa-1x"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+			            }
+                        
+
+                        <tr id="kpisce_row_example_hidden" style="display: none;">
+                            <th scope="row" id="row_kpisce_new_id" style="display: none;">-</th>
+                            <td style="padding: 2px;">
+                                <select type="select" id="row_kpisce_new_kpi" class="custom-select">
+                                    @for (int i = 0; i < ValueB.Count; i++)
+                                    {
+                                        <option value="@ValueB[i]["Id"]">@(ValueB[i]["CategoryName"] + ": " + language.Getkey("language_short") == "es" ? ValueB[i]["KPINameEs"] : ValueB[i]["KPINameEn"])</option>
+                                    }
+                                </select>
+                            </td>
+                            <td style="padding: 2px;">
+                                <select type="select" id="row_kpisce_new_source" class="custom-select">
+                                    @for (int i = 0; i < ValueC.Count; i++)
+                                    {
+                                        <option value="@ValueC[i]["Id"]">@ValueC[i]["SourceName"]</option>
+                                    }
+                                </select>
+                            </td>
+                            <td style="padding: 2px;"><input id="row_kpisce_new_table_name" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"><input id="row_kpisce_new_column_name_date" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"><input id="row_kpisce_new_column_name_shift" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"><input id="row_kpisce_new_column_name_value" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"><input id="row_kpisce_new_filter_additional" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"><input id="row_kpisce_new_parameters" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+@section ModalsKPIScenario
+{
+<!-- Modal 5 KPISCENARIO - Source System -->
+<div class="modal fade" id="ModalSource" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>@language.Getkey("modal_add_or_edit_sosy")
+                <div class="btn-actions-pane-right">
+                    <div role="group" class="btn-group-sm nav btn-group">
+                        <a data-toggle="tab" href="#tab-sosy-0" class="btn-shadow active btn btn-primary">@language.Getkey("btn_add")</a>
+                        <a data-toggle="tab" href="#tab-sosy-1" class="btn-shadow  btn btn-primary">@language.Getkey("btn_edit")</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="data_loading_source" style="display: block; margin: auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <rect x="40" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.1388888888888889s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.2777777777777778s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.9722222222222222s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.41666666666666663s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.8333333333333333s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.6944444444444444s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.5555555555555556s" calcMode="discrete"></animate>
+                    </rect>
+                </svg>
+            </div>
+            <div id="data_list_source" class="card-body" style="display: none;">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-sosy-0" role="tabpanel">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <div class="input-group" style="margin-bottom: 15px;">
+                                    <input type="text" id="kpisce_source_name_add_new" placeholder="@language.Getkey("modal_sosy_input_name_1")" class="form-control">
+                                    <div class="input-group-append">
+                                        <button id="btn_kpisce_source_add_new" onclick="btn_kpisce_source_add_new()" class="btn btn-primary">@language.Getkey("btn_add")</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item-divider nav-item"></li>
+                            <li class="nav-item-btn nav-item" style="padding: 0.5rem 0;">
+                                <div id="kpisce_list_add_source" style="max-height: 200px; overflow: auto; border: 1px #a1a1a1 solid; padding: 7px;">
+                                    <p style="margin-bottom: 0.3rem;">1. TOTAL ORE</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="tab-sosy-1" role="tabpanel" style="max-height: 325px; overflow: auto;">
+                        <h5 class="card-title">@language.Getkey("modal_sosy_title_table")</h5>
+                        <table class="mb-0 table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@language.Getkey("table_col_number")</th>
+                                    <th>@language.Getkey("modal_sosy_column_name_1")</th>
+                                    <th style="width: 85px;">@language.Getkey("table_col_actions")</th>
+                                </tr>
+                            </thead>
+                            <tbody id="kpisce_list_edit_source">
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td style="padding: 2px;"><input type="text" class="form-control custom-input" value="ORE TO CRUSHER"></td>
+                                    <td style="padding: 2px;">
+                                        <div class="input-group">
+                                            <button type="button" class="mb-2 mr-2 btn btn-success btn-iconv3"><i class="fa fa-pen fa-w-16 fa-1x"></i></button>
+                                            <button type="button" class="mb-2 mr-2 btn btn-danger btn-iconv3"><i class="fa fa-trash fa-w-16 fa-1x"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@language.Getkey("btn_close")</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal 7 New KPI Scenario -->
+<div class="modal fade" id="Modal_add_KPI_Scenario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>@language.Getkey("modal_add_new_kpisce")
+            </div>
+
+            <div id="data_loading_add_kpisce" style="display: block; margin: auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <rect x="40" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.1388888888888889s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.2777777777777778s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.9722222222222222s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.41666666666666663s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.8333333333333333s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.6944444444444444s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.5555555555555556s" calcMode="discrete"></animate>
+                    </rect>
+                </svg>
+            </div>
+
+            <div id="data_list_add_kpisce" class="row card-body" style="display: none;">
+                <div class="col-lg-6">
+                    <div class="tab-content">
+                        <div class="form-group row">
+                            <label for="kpisce_select_modal_add_kpi" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_kpisce_input_name_1")</label>
+                            <div class="col-sm-12">
+                                <select type="select" id="kpisce_select_modal_add_kpi" class="custom-select">
+                                    <option value="-">@language.Getkey("option_select")</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_add_source" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_kpisce_input_name_2")</label>
+                            <div class="col-sm-12">
+                                <select type="select" id="kpisce_select_modal_add_source" class="custom-select" onchange="select_modal_add_change_source()">
+                                    <option value="-">@language.Getkey("option_select")</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_add_tablename" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_kpisce_input_name_3")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="kpisce_input_modal_add_tablename" placeholder="" value="" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_add_colnamedate" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_kpisce_input_name_4")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="kpisce_input_modal_add_colnamedate" placeholder="" value="" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_add_colnameshift" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_kpisce_input_name_5")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="kpisce_input_modal_add_colnameshift" placeholder="" value="" disabled="disabled">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="tab-content">
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_add_colnamevalue" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_kpisce_input_name_6")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="kpisce_input_modal_add_colnamevalue" placeholder="" value="" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_add_filteradd" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_kpisce_input_name_7")</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" id="kpisce_input_modal_add_filteradd" rows="6" style="width: 100%;" disabled="disabled"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_add_parameters" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_kpisce_input_name_8")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="kpisce_input_modal_add_parameters" placeholder="" value="" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="text-right">
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <button type="button" id="kpisce_btn_modal_add" class="btn btn-primary mr-3" onclick="kpisce_btn_modal_add()">@language.Getkey("btn_save")</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@language.Getkey("btn_close")</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal 8 Edit KPI Scenario -->
+<div class="modal fade" id="Modal_edit_KPI_Scenario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>@language.Getkey("modal_edit_kpisce")
+            </div>
+
+            <div id="data_loading_edit_kpisce" style="display: block; margin: auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <rect x="40" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.1388888888888889s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.2777777777777778s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.9722222222222222s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.41666666666666663s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.8333333333333333s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.6944444444444444s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.5555555555555556s" calcMode="discrete"></animate>
+                    </rect>
+                </svg>
+            </div>
+
+            <div id="data_list_edit_kpisce" class="row card-body" style="display: none;">
+                <div class="col-lg-6">
+                    <div class="tab-content">
+                        <div class="form-group row">
+                            <label for="kpisce_select_modal_edit_kpi" class="col-sm-12 col-form-label">@language.Getkey("modal_edit_kpisce_input_name_1")</label>
+                            <div class="col-sm-12">
+                                <select type="select" id="kpisce_select_modal_edit_kpi" class="custom-select">
+                                    <option value="-">@language.Getkey("option_select")</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_edit_source" class="col-sm-12 col-form-label">@language.Getkey("modal_edit_kpisce_input_name_2")</label>
+                            <div class="col-sm-12">
+                                <select type="select" id="kpisce_select_modal_edit_source" class="custom-select" onchange="select_modal_edit_change_source()">
+                                    <option value="-">@language.Getkey("option_select")</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_edit_tablename" class="col-sm-12 col-form-label">@language.Getkey("modal_edit_kpisce_input_name_3")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="kpisce_input_modal_edit_tablename" placeholder="" value="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_edit_colnamedate" class="col-sm-12 col-form-label">@language.Getkey("modal_edit_kpisce_input_name_4")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="kpisce_input_modal_edit_colnamedate" placeholder="" value="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_edit_colnameshift" class="col-sm-12 col-form-label">@language.Getkey("modal_edit_kpisce_input_name_5")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="kpisce_input_modal_edit_colnameshift" placeholder="" value="">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="tab-content">
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_edit_colnamevalue" class="col-sm-12 col-form-label">@language.Getkey("modal_edit_kpisce_input_name_6")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="kpisce_input_modal_edit_colnamevalue" placeholder="" value="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_edit_filteradd" class="col-sm-12 col-form-label">@language.Getkey("modal_edit_kpisce_input_name_7")</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" id="kpisce_input_modal_edit_filteradd" rows="6" style="width: 100%;"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kpisce_input_modal_edit_parameters" class="col-sm-12 col-form-label">@language.Getkey("modal_edit_kpisce_input_name_8")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="kpisce_input_modal_edit_parameters" placeholder="" value="">
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="text-right">
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <button type="button" id="kpisce_btn_modal_edit" data-editid="" class="btn btn-primary mr-3" onclick="kpisce_btn_modal_edit()">@language.Getkey("btn_save")</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@language.Getkey("btn_close")</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+}

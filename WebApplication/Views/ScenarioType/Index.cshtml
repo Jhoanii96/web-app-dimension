@@ -1,0 +1,87 @@
+﻿@model WebApplication.Controllers.ScenarioTypeController.GroupIndexModel;
+@inject LanguageService language;
+@{
+    ViewData["Title"] = language.Getkey("dimension_scty_title");
+
+    var ValueA = Model.CollectionA.Rows;
+}
+
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                @language.Getkey("dimension_scty_title")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <h5 class="card-title">@language.Getkey("activity_name")</h5>
+        <div class="row">
+            <div class="col">
+                <ul class="nav flex-column">
+                    <li class="nav-item-btn nav-item">
+                        <button id="scty_add_new_row" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-plus"> </i> @language.Getkey("btn_add")</button>
+                        <button id="scty_save_new_rows" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-diskette"> </i> @language.Getkey("btn_save")</button>
+                        <button id="scty_cancel_new_rows" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-close-circle"> </i> @language.Getkey("btn_cancel")</button>
+                        <button id="scty_refresh_rows" onClick="refresh_scty_table()" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-refresh"> </i> @language.Getkey("btn_refresh")</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">@language.Getkey("dimension_scty_table_name")</h5>
+                <table class="mb-0 table table-hover table-bordered">
+                    <thead style="font-size: 12px;">
+                        <tr>
+                            <th>@language.Getkey("table_col_number")</th>
+                            <th>@language.Getkey("dimension_scty_column_name_1")</th>
+                            <th style="width: 84px;">@language.Getkey("table_col_actions")</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scty_rows_list">
+                        @for (int i = 0; i < ValueA.Count; i++)
+                        {
+                            <tr>
+                                <th scope="row" id="row_scty_@(i + 1)_id" data-value="@ValueA[i]["Id"]">@(i + 1)</th>
+                                <td style="padding: 2px;"><input id="row_scty_@(i + 1)_name" type="text" class="form-control" value="@ValueA[i]["ScenarioName"]" disabled="disabled"></td>
+                                <td style="padding: 2px;">
+                                    <div class="input-group">
+                                        <button type="button" id="row_scty_btn_@(i + 1)_edr" onClick="edit_scty_row(@(i + 1))" class="btn btn-primary btn-iconv2" style="margin-right: 2px !important;"><i class="fa fa-pen fa-w-16 fa-1x"></i></button>
+                                        <button type="button" id="row_scty_btn_@(i + 1)_rcr" onClick="realizar_cambios_scty_row(@(i + 1))" data-actived="0" class="btn btn-success btn-iconv2" style="margin-right: 2px !important; display: none; font-size: 0.7rem;"><i class="fa fa-edit fa-w-16 fa-1x"></i></button>
+                                        <button type="button" id="row_scty_btn_@(i + 1)_ccr" onClick="cancelar_cambio_scty_row(@(i + 1))" data-actived="0" class="btn btn-secondary btn-iconv2" style="margin-right: 2px !important; display: none;"><i class="fa fa-times fa-w-16 fa-1x"></i></button>
+                                        <button type="button" id="row_scty_btn_@(i + 1)_der" onClick="delete_scty_row('@(i + 1). @ValueA[i]["ScenarioName"]', @(i + 1))" class="btn btn-primary btn-iconv2"><i class="fa fa-trash fa-w-16 fa-1x"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                        <tr id="scty_row_example_hidden" style="display: none;">
+                            <th scope="row" id="row_scty_new_id">-</th>
+                            <td style="padding: 2px;"><input id="row_scty_new_name" type="text" class="form-control"></td>
+                            <td style="padding: 2px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+

@@ -1,0 +1,104 @@
+﻿@inject LanguageService language;
+@{
+    ViewData["Title"] = language.Getkey("Login_title");
+}
+
+    <div class="bg-image p-5 text-center" style="background-image: url('/images/24075591036_bafaab0a92_o.jpg'); height: calc(100vh - 60px); ">
+        <!-- Jumbotron -->
+        <div class="cover-container" id="login_with_microsoft" style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);filter: drop-shadow(2px 4px 6px black);">
+            <div class="cover">
+                <img src="/images/Logo Gointegrear v1.png">
+            </div>
+            <div style="margin-top: 20px;">
+                <a href="/Login/SignIn" style="text-decoration: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="300px" height="50px" viewBox="0 0 3278 522" class="SignInButton">
+                        <style type="text/css">
+                        .fil0:hover {
+                            fill: #4B4B4B;
+                        }
+                        .fnt0 {
+                            font-size: @language.Getkey("login_microsoft_account_font_size");
+                            font-family: 'Segoe UI Semibold', 'Segoe UI';
+                            text-decoration: none;
+                        }
+                        </style>
+                    <rect class="fil0" x="2" y="2" width="3174" height="517" fill="black" />
+                    <rect x="150" y="129" width="122" height="122" fill="#F35325" />
+                    <rect x="284" y="129" width="122" height="122" fill="#81BC06" />
+                    <rect x="150" y="263" width="122" height="122" fill="#05A6F0" />
+                    <rect x="284" y="263" width="122" height="122" fill="#FFBA08" />
+                    <text x="470" y="@language.Getkey("login_microsoft_account_y_position")" fill="white" class="fnt0">@language.Getkey("login_microsoft_account")</text>
+                </svg>
+                </a>
+            </div>
+            <div style="margin-top: 5px;">
+                <a href="javascript:void(0);" id="btn_go_login_basic" class="btn-link" style="text-decoration: underline;">@language.Getkey("login_basic_account")</a>
+            </div>
+        </div>
+        <!-- Jumbotron -->
+        <!-- Section Login With Basic Account -->
+        <div class="mx-auto app-login-box col-md-8" id="login_with_basic" style="display: none;">
+            <div class="modal-dialog w-100 mx-auto" style="box-shadow: none; border-radius: 0;">
+                <div class="modal-content" style="background-color: transparent; border: none;">
+                    <div class="cover-container">
+                        <div class="cover">
+                            <img src="/images/Logo Gointegrear v1.png" style="margin: 20px 0; width: 150px;">
+                        </div>
+                    </div>
+                    <div class="modal-body" style="background: #fff; border-top-right-radius: 0.25rem; border-top-left-radius: 0.25rem;">
+                        <div class="modal-title text-center" style="font-size: 16px;">
+                            <div class="mt-2" id="login_message_welcome">
+                                <div>@language.Getkey("login_basic_account_header_1")</div>
+                                <span>@language.Getkey("login_basic_account_header_2")</span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-12" id="section_login_email">
+                                <div class="position-relative" style="margin: 25px 10px;">
+                                    <input id="login_email_input" placeholder="@language.Getkey("login_input_email")" type="email" class="form-control form-login">
+                                </div>
+                            </div>
+                            <div class="col-md-12" id="section_login_password" style="display: none;">
+                                <div class="position-relative" style="margin: 25px 10px;">
+                                    <input id="login_password_input" placeholder="@language.Getkey("login_input_password")" type="password" class="form-control form-login">
+                                </div>
+                            </div>
+                            <div class="col-md-12" id="section_login_new_password" style="display: none;">
+                                <div class="position-relative" style="margin: 25px 10px;">
+                                    <input id="login_new_password" placeholder="@language.Getkey("login_input_new_password")" type="password" class="form-control form-login" autocomplete="new-password">
+                                </div>
+                            </div>
+                            <div class="col-md-12" id="section_login_repeat_password" style="display: none;">
+                                <div class="position-relative" style="margin: 0px 10px 25px 10px;">
+                                    <input id="login_repeat_new_password" placeholder="@language.Getkey("login_input_repeat_password")" type="password" class="form-control form-login" autocomplete="new-password">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="login_error_message" class="position-relative" style="margin-bottom: 10px; display: none;">
+                            <label class="form-check-label" style="color: red;">Error message</label>
+                        </div>
+                        <div id="login_info_message" class="position-relative" style="margin-bottom: 10px; display: none;">
+                            <label class="form-check-label" style="color: blue;">Info message</label>
+                        </div>
+                        <div class="position-relative form-check" id="section_keep_login" style="display: none;">
+                            <input name="check" id="login_keep_login" type="checkbox" class="form-check-input" style="margin-top: 0.2rem;">
+                            <label for="login_keep_login" class="form-check-label">@language.Getkey("login_check_keep_me")</label>
+                        </div>
+
+                        <div class="divider"></div>
+                        <span class="mb-0">@language.Getkey("login_no_account") <a href="mailto:gointegreat.support@gointegreat.com" class="btn-link">gointegreat.support@gointegreat.com</a></span>
+                    </div>
+                    <div class="modal-footer clearfix">
+                        <div class="float-left">
+                            <a href="javascript:void(0);" id="btn_go_login_microsoft" class="btn-lg btn btn-link"><i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp;@language.Getkey("login_back_login_with_microsoft")</a>
+                        </div>
+                        <div class="float-right">
+                            <button id="btn_login_basic_account" data-steps="1" data-new-password="0" class="btn btn-primary btn-lg">@language.Getkey("login_basic_next_btn")</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-white opacity-8 mt-3">Copyright © Gointegreat @DateTime.Now.Year</div>
+        </div>
+    </div>

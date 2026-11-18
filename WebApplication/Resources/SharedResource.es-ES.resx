@@ -1,0 +1,1053 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="activity_name" xml:space="preserve">
+    <value>Actividad</value>
+  </data>
+  <data name="adduser_information_subtitle" xml:space="preserve">
+    <value>Informacion del usuario</value>
+  </data>
+  <data name="btn_add" xml:space="preserve">
+    <value>Agregar</value>
+  </data>
+  <data name="btn_cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="btn_close" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="btn_edit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="btn_refresh" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="btn_reset" xml:space="preserve">
+    <value>Resetear</value>
+  </data>
+  <data name="btn_save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="btn_update" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="configuration_name" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="conf_adduser_all_modules" xml:space="preserve">
+    <value>Todos los módulos</value>
+  </data>
+  <data name="conf_adduser_description" xml:space="preserve">
+    <value>El nuevo usuario que se creará con "email" será el "inicio de sesión de usuario", y la contraseña se creará cuando el usuario inicie sesión por primera vez.</value>
+  </data>
+  <data name="conf_adduser_input_1" xml:space="preserve">
+    <value>Nombres</value>
+  </data>
+  <data name="conf_adduser_input_2" xml:space="preserve">
+    <value>Apellidos</value>
+  </data>
+  <data name="conf_adduser_input_3" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+  <data name="conf_adduser_input_4" xml:space="preserve">
+    <value>Mostrar el nombre y apellido en la barra superior</value>
+  </data>
+  <data name="conf_adduser_input_5" xml:space="preserve">
+    <value>Usuario habilitado</value>
+  </data>
+  <data name="conf_adduser_reset_password" xml:space="preserve">
+    <value>Restablecer contraseña</value>
+  </data>
+  <data name="conf_adduser_reset_password_text" xml:space="preserve">
+    <value>La contraseña debe cambiarse desde Azure Portal.</value>
+  </data>
+  <data name="conf_adduser_subtitle_1" xml:space="preserve">
+    <value>Informacion del usuario</value>
+  </data>
+  <data name="conf_adduser_subtitle_2" xml:space="preserve">
+    <value>Permisos del módulo</value>
+  </data>
+  <data name="conf_adduser_title" xml:space="preserve">
+    <value>Agregar usuario</value>
+  </data>
+  <data name="conf_adduser_user_enabled_text" xml:space="preserve">
+    <value>Otro usuario con permisos puede deshabilitar su cuenta.</value>
+  </data>
+  <data name="conf_edituser_basic_account" xml:space="preserve">
+    <value>Cuenta Básica</value>
+  </data>
+  <data name="conf_edituser_input_1" xml:space="preserve">
+    <value>Nombres</value>
+  </data>
+  <data name="conf_edituser_input_2" xml:space="preserve">
+    <value>Apellidos</value>
+  </data>
+  <data name="conf_edituser_input_3" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+  <data name="conf_edituser_input_4" xml:space="preserve">
+    <value>Mostrar el nombre y apellido en la barra superior</value>
+  </data>
+  <data name="conf_edituser_microsoft_account" xml:space="preserve">
+    <value>Cuenta de Microsoft</value>
+  </data>
+  <data name="conf_edituser_subtitle_1" xml:space="preserve">
+    <value>Informacion del usuario</value>
+  </data>
+  <data name="conf_edituser_subtitle_2" xml:space="preserve">
+    <value>Permisos del módulo</value>
+  </data>
+  <data name="conf_edituser_title" xml:space="preserve">
+    <value>Editar usuario</value>
+  </data>
+  <data name="conf_factkpi_table_col_name_1" xml:space="preserve">
+    <value>KPI</value>
+  </data>
+  <data name="conf_factkpi_table_col_name_2" xml:space="preserve">
+    <value>Periodo</value>
+  </data>
+  <data name="conf_factkpi_table_col_name_3" xml:space="preserve">
+    <value>Tipo Escenario</value>
+  </data>
+  <data name="conf_factkpi_table_col_name_4" xml:space="preserve">
+    <value>Equipo</value>
+  </data>
+  <data name="conf_factkpi_table_col_name_5" xml:space="preserve">
+    <value>Proceso</value>
+  </data>
+  <data name="conf_factkpi_table_col_name_6" xml:space="preserve">
+    <value>Operación</value>
+  </data>
+  <data name="conf_factkpi_table_col_name_7" xml:space="preserve">
+    <value>Orden de ejecución</value>
+  </data>
+  <data name="conf_factkpi_table_col_name_8" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="conf_factkpi_table_title" xml:space="preserve">
+    <value>Lista Fact KPI</value>
+  </data>
+  <data name="conf_factkpi_title" xml:space="preserve">
+    <value>Fact KPI</value>
+  </data>
+  <data name="conf_languages_title" xml:space="preserve">
+    <value>Configuración de idioma</value>
+  </data>
+  <data name="conf_lase_add_or_edit_language" xml:space="preserve">
+    <value>Agregar o editar Idioma</value>
+  </data>
+  <data name="conf_lase_add_or_edit_sharedresource" xml:space="preserve">
+    <value>Agregar o editar variables compartidas</value>
+  </data>
+  <data name="conf_lase_column_name_1" xml:space="preserve">
+    <value>Variable</value>
+  </data>
+  <data name="conf_lase_column_name_2" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="conf_lase_column_name_3" xml:space="preserve">
+    <value>Comentario</value>
+  </data>
+  <data name="conf_lase_language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="conf_lase_table_title" xml:space="preserve">
+    <value>Lista</value>
+  </data>
+  <data name="conf_measurement_add_or_edit_uom" xml:space="preserve">
+    <value>Agregar o editar UOM</value>
+  </data>
+  <data name="conf_measurement_column_name_1" xml:space="preserve">
+    <value>Descripción En</value>
+  </data>
+  <data name="conf_measurement_column_name_2" xml:space="preserve">
+    <value>Descripción Es</value>
+  </data>
+  <data name="conf_measurement_column_name_3" xml:space="preserve">
+    <value>UOM</value>
+  </data>
+  <data name="conf_measurement_table_name" xml:space="preserve">
+    <value>Lista de medidas</value>
+  </data>
+  <data name="conf_measurement_title" xml:space="preserve">
+    <value>Medición</value>
+  </data>
+  <data name="conf_measurement_uom" xml:space="preserve">
+    <value>UOM</value>
+  </data>
+  <data name="conf_module_column_name_1" xml:space="preserve">
+    <value>Módulo Es</value>
+  </data>
+  <data name="conf_module_column_name_2" xml:space="preserve">
+    <value>Módulo En</value>
+  </data>
+  <data name="conf_module_column_name_3" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="conf_module_table_name" xml:space="preserve">
+    <value>Lista de módulos</value>
+  </data>
+  <data name="conf_module_title" xml:space="preserve">
+    <value>Configuración del módulo</value>
+  </data>
+  <data name="conf_profile_about_me" xml:space="preserve">
+    <value>Sobre mí</value>
+  </data>
+  <data name="conf_profile_account_created" xml:space="preserve">
+    <value>Cuenta creada</value>
+  </data>
+  <data name="conf_profile_input_name_1" xml:space="preserve">
+    <value>Nombres</value>
+  </data>
+  <data name="conf_profile_input_name_2" xml:space="preserve">
+    <value>Apellidos</value>
+  </data>
+  <data name="conf_profile_input_name_3" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+  <data name="conf_profile_input_name_4" xml:space="preserve">
+    <value>Permisos</value>
+  </data>
+  <data name="conf_profile_input_name_5" xml:space="preserve">
+    <value>Mostrar el nombre y apellido en la barra superior</value>
+  </data>
+  <data name="conf_profile_input_name_6" xml:space="preserve">
+    <value>Cambiar foto de perfil</value>
+  </data>
+  <data name="conf_profile_personal_information" xml:space="preserve">
+    <value>Informacion personal</value>
+  </data>
+  <data name="conf_profile_title" xml:space="preserve">
+    <value>Cuenta de usuario</value>
+  </data>
+  <data name="conf_reportsetting_column_name_1" xml:space="preserve">
+    <value>Nombre del reporte del menú En</value>
+  </data>
+  <data name="conf_reportsetting_column_name_2" xml:space="preserve">
+    <value>Nombre del reporte del menú Es</value>
+  </data>
+  <data name="conf_reportsetting_column_name_3" xml:space="preserve">
+    <value>Nombre del reporte En</value>
+  </data>
+  <data name="conf_reportsetting_column_name_4" xml:space="preserve">
+    <value>Reporte URL En</value>
+  </data>
+  <data name="conf_reportsetting_column_name_5" xml:space="preserve">
+    <value>Nombre del reporte Es</value>
+  </data>
+  <data name="conf_reportsetting_column_name_6" xml:space="preserve">
+    <value>Reporte URL Es</value>
+  </data>
+  <data name="conf_reportsetting_column_name_7" xml:space="preserve">
+    <value>Módulo</value>
+  </data>
+  <data name="conf_reportsetting_table_name" xml:space="preserve">
+    <value>Lista de informes</value>
+  </data>
+  <data name="conf_reportsetting_title" xml:space="preserve">
+    <value>Configuración de informes</value>
+  </data>
+  <data name="conf_userlist_column_name_1" xml:space="preserve">
+    <value>Nombres</value>
+  </data>
+  <data name="conf_userlist_column_name_2" xml:space="preserve">
+    <value>Apellidos</value>
+  </data>
+  <data name="conf_userlist_column_name_3" xml:space="preserve">
+    <value>Dirección de correo electrónico</value>
+  </data>
+  <data name="conf_userlist_column_name_4" xml:space="preserve">
+    <value>Permiso</value>
+  </data>
+  <data name="conf_userlist_column_name_5" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="conf_userlist_table_name" xml:space="preserve">
+    <value>Lista</value>
+  </data>
+  <data name="conf_userlist_title" xml:space="preserve">
+    <value>Lista de usuarios</value>
+  </data>
+  <data name="delete_body_message" xml:space="preserve">
+    <value>Ítem que desea eliminar:</value>
+  </data>
+  <data name="delete_body_message2" xml:space="preserve">
+    <value>Al eliminar el elemento, no será posible recuperarlo, la acción de eliminación es permanente.</value>
+  </data>
+  <data name="delete_header_message" xml:space="preserve">
+    <value>¿Estás seguro de que quieres eliminar este ítem?</value>
+  </data>
+  <data name="dimension_add_or_edit_model" xml:space="preserve">
+    <value>Agregar o editar modelo</value>
+  </data>
+  <data name="dimension_category_title" xml:space="preserve">
+    <value>Dimensión categoría</value>
+  </data>
+  <data name="dimension_cat_column_name_1" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="dimension_cat_column_name_2" xml:space="preserve">
+    <value>Área funcional</value>
+  </data>
+  <data name="dimension_cat_column_name_3" xml:space="preserve">
+    <value>Proceso</value>
+  </data>
+  <data name="dimension_cat_column_name_4" xml:space="preserve">
+    <value>Subproceso</value>
+  </data>
+  <data name="dimension_cat_column_name_5" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dimension_cat_table_name" xml:space="preserve">
+    <value>Lista de categoría</value>
+  </data>
+  <data name="dimension_cnf_sosy_column_name_1" xml:space="preserve">
+    <value>Origen esquema</value>
+  </data>
+  <data name="dimension_cnf_sosy_column_name_2" xml:space="preserve">
+    <value>Destino esquema</value>
+  </data>
+  <data name="dimension_cnf_sosy_column_name_3" xml:space="preserve">
+    <value>Nombre de la tabla</value>
+  </data>
+  <data name="dimension_cnf_sosy_column_name_4" xml:space="preserve">
+    <value>Nombre de la carpeta</value>
+  </data>
+  <data name="dimension_cnf_sosy_column_name_5" xml:space="preserve">
+    <value>Secret name del Servidor</value>
+  </data>
+  <data name="dimension_cnf_sosy_column_name_6" xml:space="preserve">
+    <value>Secret name de Autorización</value>
+  </data>
+  <data name="dimension_cnf_sosy_column_name_7" xml:space="preserve">
+    <value>Nombre de usuario</value>
+  </data>
+  <data name="dimension_cnf_sosy_table_name" xml:space="preserve">
+    <value>Lista de sistemas de origen</value>
+  </data>
+  <data name="dimension_cnf_sosy_title" xml:space="preserve">
+    <value>Configuración sistema fuente</value>
+  </data>
+  <data name="dimension_equipment_column_name_1" xml:space="preserve">
+    <value>Modelo</value>
+  </data>
+  <data name="dimension_equipment_column_name_2" xml:space="preserve">
+    <value>Equipo</value>
+  </data>
+  <data name="dimension_equipment_column_name_3" xml:space="preserve">
+    <value>Flota</value>
+  </data>
+  <data name="dimension_equipment_column_name_4" xml:space="preserve">
+    <value>Tipo de flota</value>
+  </data>
+  <data name="dimension_equipment_model" xml:space="preserve">
+    <value>Modelo</value>
+  </data>
+  <data name="dimension_equipment_table_name" xml:space="preserve">
+    <value>Lista de equipos</value>
+  </data>
+  <data name="dimension_equipment_title" xml:space="preserve">
+    <value>Dimensión Equipo</value>
+  </data>
+  <data name="dimension_kpisce_add_or_edit_sosy" xml:space="preserve">
+    <value>Agregar o editar el sistema de origen</value>
+  </data>
+  <data name="dimension_kpisce_column_name_1" xml:space="preserve">
+    <value>KPI</value>
+  </data>
+  <data name="dimension_kpisce_column_name_2" xml:space="preserve">
+    <value>Sistema de origen</value>
+  </data>
+  <data name="dimension_kpisce_column_name_3" xml:space="preserve">
+    <value>Nombre de la tabla</value>
+  </data>
+  <data name="dimension_kpisce_column_name_4" xml:space="preserve">
+    <value>Columna Fecha</value>
+  </data>
+  <data name="dimension_kpisce_column_name_5" xml:space="preserve">
+    <value>Columna Turno</value>
+  </data>
+  <data name="dimension_kpisce_column_name_6" xml:space="preserve">
+    <value>Columna Valor</value>
+  </data>
+  <data name="dimension_kpisce_column_name_7" xml:space="preserve">
+    <value>Filtro adicional</value>
+  </data>
+  <data name="dimension_kpisce_column_name_8" xml:space="preserve">
+    <value>Parámetros</value>
+  </data>
+  <data name="dimension_kpisce_kpi" xml:space="preserve">
+    <value>KPI</value>
+  </data>
+  <data name="dimension_kpisce_sosy" xml:space="preserve">
+    <value>Sistema de origen</value>
+  </data>
+  <data name="dimension_kpisce_title" xml:space="preserve">
+    <value>Dimensión Escenario KPI </value>
+  </data>
+  <data name="dimension_kpi_add_or_edit_category" xml:space="preserve">
+    <value>Agregar o editar categoría</value>
+  </data>
+  <data name="dimension_kpi_add_or_edit_measurement" xml:space="preserve">
+    <value>Agregar o editar Medida</value>
+  </data>
+  <data name="dimension_kpi_category" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+  <data name="dimension_kpi_column_name_1" xml:space="preserve">
+    <value>Medición</value>
+  </data>
+  <data name="dimension_kpi_column_name_2" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+  <data name="dimension_kpi_column_name_3" xml:space="preserve">
+    <value>Agregación</value>
+  </data>
+  <data name="dimension_kpi_column_name_4" xml:space="preserve">
+    <value>Ponderado por</value>
+  </data>
+  <data name="dimension_kpi_column_name_5" xml:space="preserve">
+    <value>Precisión decimal</value>
+  </data>
+  <data name="dimension_kpi_measurement" xml:space="preserve">
+    <value>Medición</value>
+  </data>
+  <data name="dimension_kpi_table_name" xml:space="preserve">
+    <value>Lista de KPI</value>
+  </data>
+  <data name="dimension_kpi_title" xml:space="preserve">
+    <value>Dimensión KPI</value>
+  </data>
+  <data name="dimension_operation_column_name_1" xml:space="preserve">
+    <value>Nombre de la operación</value>
+  </data>
+  <data name="dimension_operation_column_name_2" xml:space="preserve">
+    <value>País</value>
+  </data>
+  <data name="dimension_operation_column_name_3" xml:space="preserve">
+    <value>Región</value>
+  </data>
+  <data name="dimension_operation_table_name" xml:space="preserve">
+    <value>Lista operación</value>
+  </data>
+  <data name="dimension_operation_title" xml:space="preserve">
+    <value>Dimensión Operación</value>
+  </data>
+  <data name="dimension_period_column_name_1" xml:space="preserve">
+    <value>Nombre del período</value>
+  </data>
+  <data name="dimension_period_column_name_2" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="dimension_period_column_name_3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dimension_period_table_name" xml:space="preserve">
+    <value>Lisat Período</value>
+  </data>
+  <data name="dimension_period_title" xml:space="preserve">
+    <value>Dimensión Período</value>
+  </data>
+  <data name="dimension_process_add_or_edit_sarea" xml:space="preserve">
+    <value>Agregar o editar subárea</value>
+  </data>
+  <data name="dimension_process_column_name_1" xml:space="preserve">
+    <value>Subárea</value>
+  </data>
+  <data name="dimension_process_column_name_2" xml:space="preserve">
+    <value>Nombre del proceso</value>
+  </data>
+  <data name="dimension_process_sarea" xml:space="preserve">
+    <value>Subárea</value>
+  </data>
+  <data name="dimension_process_table_name" xml:space="preserve">
+    <value>Lista KPI</value>
+  </data>
+  <data name="dimension_process_title" xml:space="preserve">
+    <value>Dimensión Proceso</value>
+  </data>
+  <data name="dimension_scty_column_name_1" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="dimension_scty_column_name_2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dimension_scty_table_name" xml:space="preserve">
+    <value>Lista Tipo de escenario</value>
+  </data>
+  <data name="dimension_scty_title" xml:space="preserve">
+    <value>Dimensión Tipo de escenario</value>
+  </data>
+  <data name="dimension_sosy_column_name_1" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="dimension_sosy_column_name_2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="dimension_sosy_table_name" xml:space="preserve">
+    <value>Lista Sistema de fuente</value>
+  </data>
+  <data name="dimension_sosy_title" xml:space="preserve">
+    <value>Dimensión Sistema de fuente</value>
+  </data>
+  <data name="dimension_uom_column_name_1" xml:space="preserve">
+    <value>Nombre inglés</value>
+  </data>
+  <data name="dimension_uom_column_name_2" xml:space="preserve">
+    <value>Nombre español</value>
+  </data>
+  <data name="dimension_uom_column_name_3" xml:space="preserve">
+    <value>Símbolo</value>
+  </data>
+  <data name="dimension_uom_table_name" xml:space="preserve">
+    <value>Lista UOM</value>
+  </data>
+  <data name="dimension_uom_title" xml:space="preserve">
+    <value>Dimensión UOM</value>
+  </data>
+  <data name="dropdown_all" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="edituser_all_permissions" xml:space="preserve">
+    <value>Todos los módulos</value>
+  </data>
+  <data name="edituser_basic_account" xml:space="preserve">
+    <value>Cuenta de Microsoft</value>
+  </data>
+  <data name="edituser_information_headerbox" xml:space="preserve">
+    <value>Informacion personal</value>
+  </data>
+  <data name="filter_name" xml:space="preserve">
+    <value>Filtro</value>
+  </data>
+  <data name="header_sign_in" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
+  <data name="header_sign_out" xml:space="preserve">
+    <value>Cerrar sesión</value>
+  </data>
+  <data name="header_user_account" xml:space="preserve">
+    <value>Cuenta de usuario</value>
+  </data>
+  <data name="heading_dashboard" xml:space="preserve">
+    <value>Informes</value>
+  </data>
+  <data name="heading_dimension" xml:space="preserve">
+    <value>Dimensiones</value>
+  </data>
+  <data name="heading_report" xml:space="preserve">
+    <value>Reportes</value>
+  </data>
+  <data name="heading_setting" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="language_id" xml:space="preserve">
+    <value>ES</value>
+  </data>
+  <data name="language_item" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="language_name_en" xml:space="preserve">
+    <value>Inglés</value>
+  </data>
+  <data name="language_name_es" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="language_short" xml:space="preserve">
+    <value>es</value>
+  </data>
+  <data name="login_back_login_with_microsoft" xml:space="preserve">
+    <value>Volver a Iniciar sesión con Microsoft</value>
+  </data>
+  <data name="login_basic_account" xml:space="preserve">
+    <value>Iniciar sesión con cuenta básica</value>
+  </data>
+  <data name="login_basic_account_header_1" xml:space="preserve">
+    <value>Bienvenido de nuevo,</value>
+  </data>
+  <data name="login_basic_account_header_2" xml:space="preserve">
+    <value>Inicie sesión su cuenta a continuación.</value>
+  </data>
+  <data name="login_basic_account_header_3" xml:space="preserve">
+    <value>Bienvenido al registro</value>
+  </data>
+  <data name="login_basic_account_header_4" xml:space="preserve">
+    <value>Por favor ingrese su nueva contraseña.</value>
+  </data>
+  <data name="login_basic_enter_password" xml:space="preserve">
+    <value>Por favor introduzca la contraseña.</value>
+  </data>
+  <data name="login_basic_login_btn" xml:space="preserve">
+    <value>Iniciar sesión</value>
+  </data>
+  <data name="login_basic_message_label" xml:space="preserve">
+    <value>¡Registro exitoso!, vuelva a iniciar sesión con su cuenta.&lt;br&gt;Será redirigido automáticamente a la página principal de inicio de sesión.</value>
+  </data>
+  <data name="login_basic_next_btn" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+  <data name="login_basic_password_not_match" xml:space="preserve">
+    <value>La contraseña ingresada no coincide.</value>
+  </data>
+  <data name="login_basic_register_btn" xml:space="preserve">
+    <value>Registrarse</value>
+  </data>
+  <data name="login_basic_user_not_found" xml:space="preserve">
+    <value>Este usuario no fue encontrado.</value>
+  </data>
+  <data name="login_check_keep_me" xml:space="preserve">
+    <value>Mantenerme conectado</value>
+  </data>
+  <data name="login_input_email" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+  <data name="login_input_new_password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="login_input_password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="login_input_repeat_password" xml:space="preserve">
+    <value>Repetir contraseña</value>
+  </data>
+  <data name="login_microsoft_account" xml:space="preserve">
+    <value>Iniciar sesión con Microsoft</value>
+  </data>
+  <data name="login_microsoft_account_font_size" xml:space="preserve">
+    <value>208px</value>
+  </data>
+  <data name="login_microsoft_account_y_position" xml:space="preserve">
+    <value>340</value>
+  </data>
+  <data name="login_no_account" xml:space="preserve">
+    <value>¿Sin cuenta?</value>
+  </data>
+  <data name="Login_title" xml:space="preserve">
+    <value>Iniciar sesión</value>
+  </data>
+  <data name="modal_add_new_kpisce" xml:space="preserve">
+    <value>Agregar nuevo Escenario KPI</value>
+  </data>
+  <data name="modal_add_new_kpisce_input_name_1" xml:space="preserve">
+    <value>KPI</value>
+  </data>
+  <data name="modal_add_new_kpisce_input_name_2" xml:space="preserve">
+    <value>Sistema de origen</value>
+  </data>
+  <data name="modal_add_new_kpisce_input_name_3" xml:space="preserve">
+    <value>Nombre de la tabla</value>
+  </data>
+  <data name="modal_add_new_kpisce_input_name_4" xml:space="preserve">
+    <value>Columna Fecha</value>
+  </data>
+  <data name="modal_add_new_kpisce_input_name_5" xml:space="preserve">
+    <value>Columna Turno</value>
+  </data>
+  <data name="modal_add_new_kpisce_input_name_6" xml:space="preserve">
+    <value>Columna Valor</value>
+  </data>
+  <data name="modal_add_new_kpisce_input_name_7" xml:space="preserve">
+    <value>Filtro adicional</value>
+  </data>
+  <data name="modal_add_new_kpisce_input_name_8" xml:space="preserve">
+    <value>Parámetros</value>
+  </data>
+  <data name="modal_add_or_edit_category" xml:space="preserve">
+    <value>Agregar o editar categoría</value>
+  </data>
+  <data name="modal_add_or_edit_language" xml:space="preserve">
+    <value>Agregar o editar Idioma</value>
+  </data>
+  <data name="modal_add_or_edit_measurement" xml:space="preserve">
+    <value>Agregar o editar medida</value>
+  </data>
+  <data name="modal_add_or_edit_model" xml:space="preserve">
+    <value>Agregar o editar modelo</value>
+  </data>
+  <data name="modal_add_or_edit_sarea" xml:space="preserve">
+    <value>Agregar o editar subárea</value>
+  </data>
+  <data name="modal_add_or_edit_sharedresource" xml:space="preserve">
+    <value>Agregar o editar variables compartidas</value>
+  </data>
+  <data name="modal_add_or_edit_sosy" xml:space="preserve">
+    <value>Agregar o editar sistema de origen</value>
+  </data>
+  <data name="modal_add_or_edit_uom" xml:space="preserve">
+    <value>Agregar o editar UOM</value>
+  </data>
+  <data name="modal_cat_column_name_1" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+  <data name="modal_cat_column_name_2" xml:space="preserve">
+    <value>Área funcional</value>
+  </data>
+  <data name="modal_cat_column_name_3" xml:space="preserve">
+    <value>Proceso</value>
+  </data>
+  <data name="modal_cat_column_name_4" xml:space="preserve">
+    <value>Subproceso</value>
+  </data>
+  <data name="modal_cat_input_name_1" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="modal_cat_input_name_2" xml:space="preserve">
+    <value>Área funcional</value>
+  </data>
+  <data name="modal_cat_input_name_3" xml:space="preserve">
+    <value>Proceso</value>
+  </data>
+  <data name="modal_cat_input_name_4" xml:space="preserve">
+    <value>Subproceso</value>
+  </data>
+  <data name="modal_cat_input_name_5" xml:space="preserve">
+    <value />
+  </data>
+  <data name="modal_cat_title_table" xml:space="preserve">
+    <value>Lista Categoría</value>
+  </data>
+  <data name="modal_edit_kpisce" xml:space="preserve">
+    <value>Editar Escenario KPI</value>
+  </data>
+  <data name="modal_edit_kpisce_input_name_1" xml:space="preserve">
+    <value>KPI</value>
+  </data>
+  <data name="modal_edit_kpisce_input_name_2" xml:space="preserve">
+    <value>Sistema de origen</value>
+  </data>
+  <data name="modal_edit_kpisce_input_name_3" xml:space="preserve">
+    <value>Nombre de la tabla</value>
+  </data>
+  <data name="modal_edit_kpisce_input_name_4" xml:space="preserve">
+    <value>Columna Fecha</value>
+  </data>
+  <data name="modal_edit_kpisce_input_name_5" xml:space="preserve">
+    <value>Columna Turno</value>
+  </data>
+  <data name="modal_edit_kpisce_input_name_6" xml:space="preserve">
+    <value>Columna Valor</value>
+  </data>
+  <data name="modal_edit_kpisce_input_name_7" xml:space="preserve">
+    <value>Filtro adicional</value>
+  </data>
+  <data name="modal_edit_kpisce_input_name_8" xml:space="preserve">
+    <value>Parámetros</value>
+  </data>
+  <data name="modal_edit_sharedresource_comments" xml:space="preserve">
+    <value>Comentarios</value>
+  </data>
+  <data name="modal_edit_sharedresource_language" xml:space="preserve">
+    <value>Idioma:</value>
+  </data>
+  <data name="modal_edit_sharedresource_title" xml:space="preserve">
+    <value>Editar idioma del recurso compartido</value>
+  </data>
+  <data name="modal_edit_sharedresource_value" xml:space="preserve">
+    <value>Nombre del valor</value>
+  </data>
+  <data name="modal_edit_sharedresource_variable" xml:space="preserve">
+    <value>Nombre de la variable</value>
+  </data>
+  <data name="modal_language_column_name_1" xml:space="preserve">
+    <value>Nombre En</value>
+  </data>
+  <data name="modal_language_column_name_2" xml:space="preserve">
+    <value>Nombre Es</value>
+  </data>
+  <data name="modal_language_column_name_3" xml:space="preserve">
+    <value>Cultura</value>
+  </data>
+  <data name="modal_language_column_name_4" xml:space="preserve">
+    <value>Habilitado</value>
+  </data>
+  <data name="modal_language_title_table" xml:space="preserve">
+    <value>Lista de idiomas</value>
+  </data>
+  <data name="modal_lase_input_name_1" xml:space="preserve">
+    <value>Nombre En</value>
+  </data>
+  <data name="modal_lase_input_name_2" xml:space="preserve">
+    <value>Nombre Es</value>
+  </data>
+  <data name="modal_lase_input_name_3" xml:space="preserve">
+    <value>Cultura</value>
+  </data>
+  <data name="modal_model_column_name_1" xml:space="preserve">
+    <value>Modelo</value>
+  </data>
+  <data name="modal_model_input_name_1" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="modal_model_title_table" xml:space="preserve">
+    <value>Lista Modelo</value>
+  </data>
+  <data name="modal_msr_column_name_1" xml:space="preserve">
+    <value>Descripción Es</value>
+  </data>
+  <data name="modal_msr_column_name_2" xml:space="preserve">
+    <value>Descripción En</value>
+  </data>
+  <data name="modal_msr_column_name_3" xml:space="preserve">
+    <value>UOM</value>
+  </data>
+  <data name="modal_msr_input_name_1" xml:space="preserve">
+    <value>Descripción Es</value>
+  </data>
+  <data name="modal_msr_input_name_2" xml:space="preserve">
+    <value>Descripción En</value>
+  </data>
+  <data name="modal_msr_title_table" xml:space="preserve">
+    <value>Lista Medida</value>
+  </data>
+  <data name="modal_sarea_column_name_1" xml:space="preserve">
+    <value>Área</value>
+  </data>
+  <data name="modal_sarea_column_name_2" xml:space="preserve">
+    <value>Subárea</value>
+  </data>
+  <data name="modal_sarea_input_name_1" xml:space="preserve">
+    <value>Nombre área</value>
+  </data>
+  <data name="modal_sarea_input_name_2" xml:space="preserve">
+    <value>Nombre subárea</value>
+  </data>
+  <data name="modal_sarea_title_table" xml:space="preserve">
+    <value>Lista Subárea</value>
+  </data>
+  <data name="modal_sharedresource_column_name_1" xml:space="preserve">
+    <value>Nombre de la variable</value>
+  </data>
+  <data name="modal_sharedresource_input_name_1" xml:space="preserve">
+    <value>Nombre de la variable</value>
+  </data>
+  <data name="modal_sharedresource_title_table" xml:space="preserve">
+    <value>Lista de variables</value>
+  </data>
+  <data name="modal_sosy_column_name_1" xml:space="preserve">
+    <value>Sistema de fuente</value>
+  </data>
+  <data name="modal_sosy_input_name_1" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="modal_sosy_title_table" xml:space="preserve">
+    <value>Lista Sistema de fuente</value>
+  </data>
+  <data name="modal_uom_column_name_1" xml:space="preserve">
+    <value>UOM EN</value>
+  </data>
+  <data name="modal_uom_column_name_2" xml:space="preserve">
+    <value>UOM ES</value>
+  </data>
+  <data name="modal_uom_column_name_3" xml:space="preserve">
+    <value>Signo</value>
+  </data>
+  <data name="modal_uom_input_name_1" xml:space="preserve">
+    <value>Nombre español</value>
+  </data>
+  <data name="modal_uom_input_name_2" xml:space="preserve">
+    <value>Nombre inglés</value>
+  </data>
+  <data name="modal_uom_input_name_3" xml:space="preserve">
+    <value>Signo</value>
+  </data>
+  <data name="modal_uom_title_table" xml:space="preserve">
+    <value>Lista UOM</value>
+  </data>
+  <data name="no_btn" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="option_select" xml:space="preserve">
+    <value>Seleccione</value>
+  </data>
+  <data name="sign_in" xml:space="preserve">
+    <value>Iniciar sesión</value>
+  </data>
+  <data name="subheading_category" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+  <data name="subheading_cnf_languagesetting" xml:space="preserve">
+    <value>Configuración de idioma</value>
+  </data>
+  <data name="subheading_cnf_sourcesystem" xml:space="preserve">
+    <value>Conf. sistema fuente</value>
+  </data>
+  <data name="subheading_dashboard" xml:space="preserve">
+    <value>Informe</value>
+  </data>
+  <data name="subheading_equipment" xml:space="preserve">
+    <value>Equipo</value>
+  </data>
+  <data name="subheading_factkpi" xml:space="preserve">
+    <value>Fact KPI</value>
+  </data>
+  <data name="subheading_kpi" xml:space="preserve">
+    <value>KPI</value>
+  </data>
+  <data name="subheading_kpisce" xml:space="preserve">
+    <value>Escenario KPI</value>
+  </data>
+  <data name="subheading_measurement" xml:space="preserve">
+    <value>Medida</value>
+  </data>
+  <data name="subheading_modulesetting" xml:space="preserve">
+    <value>Configuración del módulo</value>
+  </data>
+  <data name="subheading_operation" xml:space="preserve">
+    <value>Operación</value>
+  </data>
+  <data name="subheading_period" xml:space="preserve">
+    <value>Periodo</value>
+  </data>
+  <data name="subheading_process" xml:space="preserve">
+    <value>Proceso</value>
+  </data>
+  <data name="subheading_profile" xml:space="preserve">
+    <value>Cuenta de usuario</value>
+  </data>
+  <data name="subheading_reportsetting" xml:space="preserve">
+    <value>Configuración del informe</value>
+  </data>
+  <data name="subheading_scenariotype" xml:space="preserve">
+    <value>Tipo escenario</value>
+  </data>
+  <data name="subheading_sourcesystem" xml:space="preserve">
+    <value>Sistema fuente</value>
+  </data>
+  <data name="subheading_uom" xml:space="preserve">
+    <value>UOM</value>
+  </data>
+  <data name="subheading_user" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="subheading_user_add" xml:space="preserve">
+    <value>Agregar usuario</value>
+  </data>
+  <data name="subheading_user_list" xml:space="preserve">
+    <value>Lista de usuarios</value>
+  </data>
+  <data name="table_col_actions" xml:space="preserve">
+    <value>Acciones</value>
+  </data>
+  <data name="table_col_number" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="yes_btn" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+</root>

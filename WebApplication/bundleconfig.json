@@ -1,0 +1,39 @@
+[
+  {
+    "outputFileName": "wwwroot/app/bundle.js",
+    "inputFiles": [
+      "wwwroot/js/site.js",
+      "wwwroot/js/siteadduser.js",
+      "wwwroot/js/sitecategory.js",
+      "wwwroot/js/siteedituser.js",
+      "wwwroot/js/siteequipment.js",
+      "wwwroot/js/sitekpi.js",
+      "wwwroot/js/sitekpiscenario.js",
+      "wwwroot/js/sitelogin.js",
+      "wwwroot/js/sitemodule.js",
+      "wwwroot/js/siteoperation.js",
+      "wwwroot/js/siteperiod.js",
+      "wwwroot/js/siteprocess.js",
+      "wwwroot/js/siteprofile.js",
+      "wwwroot/js/sitereportsetting.js",
+      "wwwroot/js/sitescenariotype.js",
+      "wwwroot/js/sitesourcesystem.js",
+      "wwwroot/js/siteuom.js",
+      "wwwroot/js/siteuserlist.js",
+      "wwwroot/js/sitecnfsourcesystem.js",
+      "wwwroot/js/sitelanguagesetting.js",
+      "wwwroot/js/sitemeasurement.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ],
+    "minify": { "enabled": true }
+  }
+]

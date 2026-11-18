@@ -1,0 +1,81 @@
+﻿@model WebApplication.Controllers.ReportController.GroupIndexModel;
+@inject LanguageService language;
+@{ var ValueA = Model.CollectionA.Rows[0];
+                ViewData["Title"] = (language.Getkey("language_short") == "es" ? ValueA["ReportEsName"] : ValueA["ReportEnName"]);
+
+                var WorkspaceId = (language.Getkey("language_short") == "es" ? ValueA["GroupId_Sp"] : ValueA["GroupId_En"]);
+                var ReportId = (language.Getkey("language_short") == "es" ? ValueA["ReportId_Sp"] : ValueA["ReportId_En"]); }
+
+<div class="text-center">
+
+    @*<iframe title="@(language.Getkey("language_short") == "es" ? ValueA["ReportEsName"] : ValueA["ReportEnName"])"
+        src="@(language.Getkey("language_short") == "es" ? ValueA["ReportEsURL"] : ValueA["ReportEnURL"])&filterPaneEnabled=false&navContentPaneEnabled=false" frameborder="0" allowFullScreen="true" style="width: 100%; height: calc(100vh - 100px);"></iframe>*@
+
+    <div id="dashboardContainer" style="width: 100%; height: calc(100vh - 100px); background-color: #ffffff; position: relative;">
+        @*<div id="pbiLoadingPlaceholder" class="">
+            <div id="pbi-svg-loading" class="wfe-loading"><div class="pbi-svg-item"><img src="https://content.powerapps.com/resource/powerbiwfe/images/PBI-logo.947f878993d21960993f.svg" width="61" height="81"><div class="shine"></div></div></div>
+        </div>*@
+    </div>
+
+</div>
+
+
+@section ScriptsReport
+{
+
+    <script src="https://microsoft.github.io//PowerBI-JavaScript/demo/node_modules/jquery/dist/jquery.js"></script>
+    <script src="https://microsoft.github.io//PowerBI-JavaScript/demo/node_modules/powerbi-client/dist/powerbi.js"></script>
+
+    <script type="text/javascript">
+
+        let workspaceId = "@WorkspaceId";
+        let reportId = "@ReportId";
+
+        $.ajax({
+            beforeSend: function () {
+                //$("#pbiLoadingPlaceholder").css({ "display": "block" });
+            },
+            url: "/Report/GetAccessToken?workspaceId=" + workspaceId + "&reportId=" + reportId,
+            type: "Post",
+            dataType: "json",
+            success: function (resp) {
+                const resp_details = JSON.parse(resp);
+                //$("#pbiLoadingPlaceholder").css({ "display": "none" });
+
+                var Token = resp_details.AccessToken.AccessToken;
+                var EmbededURL = resp_details.AccessToken.EmbedUrl;
+                var ReportId = resp_details.AccessToken.ReportId;
+
+                //https://app.powerbi.com/groups/009c2b7c-2271-462a-b210-633c1e4eca9b/reports/7222b454-9255-47c5-98b1-4a3b5b275b1e/ReportSection4d841b7b41b044e54c1d
+
+                // Get models. models contains enums that can be used.
+                var models = window['powerbi-client'].models;
+
+                // Embed configuration used to describe the what and how to embed.
+                // This object is used when calling powerbi.embed.
+                // This also includes settings and options such as filters.
+                // You can find more information at https://github.com/Microsoft/PowerBI-JavaScript/wiki/Embed-Configuration-Details.
+                var config = {
+                    type: 'report',
+                    tokenType: models.TokenType.Embed,
+                    accessToken: Token,
+                    embedUrl: EmbededURL,
+                    id: ReportId,
+                    settings: {
+                        filterPaneEnabled: false,
+                        navContentPaneEnabled: false
+                    }
+                };
+
+                // Get a reference to the embedded dashboard HTML element
+                var $dashboardContainer = $('#dashboardContainer');
+
+                var dashboard = powerbi.embed($dashboardContainer.get(0), config);
+
+
+            }
+        });
+
+    </script>
+
+}

@@ -1,0 +1,536 @@
+﻿@model WebApplication.Controllers.LanguageSettingController.GroupIndexModel;
+@inject LanguageService language;
+@{
+    ViewData["Title"] = language.Getkey("conf_languages_title");
+
+    var ValueA = Model.CollectionA.Rows;
+    var ValueB = Model.CollectionB.Rows;
+    var ValueC = Model.CollectionC;
+
+}
+
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                @language.Getkey("conf_languages_title")
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <h5 class="card-title">@language.Getkey("configuration_name")</h5>
+        <div class="row">
+            <div class="col">
+                <ul class="nav flex-column">
+                    <li class="nav-item-header nav-item">@language.Getkey("filter_name")</li>
+                </ul>
+                <div class="row">
+                    <div class="col">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <span class="nav-link coorp-color2" style="cursor: auto; padding-bottom: 0;">
+                                    @language.Getkey("conf_lase_language")
+                                </span>
+                            </li>
+                            <li>
+                                <div style="margin: 0.5rem 1rem;">
+                                    <select type="select" id="lase_filter_language" class="custom-select">
+                                        @for (int i = 0; i < ValueB.Count; i++)
+                                        {
+                                            <option value="@ValueB[i]["Id"]">@(ValueB[i]["EnglishName"] + " : " + ValueB[i]["NativeName"])</option>
+                                        }
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+                <ul class="nav flex-column">
+                    <li class="nav-item-header nav-item">@language.Getkey("activity_name")</li>
+                    <li class="nav-item">
+                        <a id="lase_list_add_edit_language" class="nav-link coorp-color2" data-toggle="modal" data-target="#ModalLanguage">
+                            <i class="nav-link-icon pe-7s-pen"> </i><span>@language.Getkey("conf_lase_add_or_edit_language")</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="lase_list_add_edit_sharedvariable" class="nav-link coorp-color2" data-toggle="modal" data-target="#ModalSharedResource">
+                            <i class="nav-link-icon pe-7s-pen"> </i><span>@language.Getkey("conf_lase_add_or_edit_sharedresource")</span>
+                        </a>
+                    </li>
+                    <li class="nav-item-divider nav-item"></li>
+                    <li class="nav-item-btn nav-item">
+                        @*<button id="lase_add_new_row" class="btn-pill btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal_add_LanguageSetting"><i class="nav-link-icon pe-7s-plus"> </i> @language.Getkey("btn_add")</button>*@
+                        <button id="lase_refresh_rows" onClick="refresh_lase_table()" class="btn-pill btn btn-primary btn-sm"><i class="nav-link-icon pe-7s-refresh"> </i> @language.Getkey("btn_refresh")</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">@language.Getkey("conf_lase_table_title")</h5>
+                <table class="mb-0 table table-hover table-bordered">
+                    <thead style="font-size: 12px;">
+                        <tr>
+                            <th>@language.Getkey("table_col_number")</th>
+                            <th>@language.Getkey("conf_lase_column_name_1")</th>
+                            <th>@language.Getkey("conf_lase_column_name_2")</th>
+                            <th>@language.Getkey("conf_lase_column_name_3")</th>
+                            <th style="width: 84px;">@language.Getkey("table_col_actions")</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lase_rows_list">
+                        @for (int i = 0; i < ValueA.Count; i++)
+			            {
+                        <tr>
+                            <th scope="row" id="row_lase_@(i + 1)_id" data-value="@ValueA[i]["Id"]">@(i + 1)</th>
+                            <td style="padding: 2px;">@ValueA[i]["VariableName"]</td>
+                            <td style="padding: 2px;">@ValueA[i]["ValueName"]</td>
+                            <td style="padding: 2px;">@ValueA[i]["Comments"]</td>
+                            <td style="padding: 2px;">
+                                <div class="input-group">
+                                    <button type="button" id="row_lase_btn_@(i + 1)_edr" onClick="edit_lase_row(@(i + 1))" data-toggle="modal" data-target="#Modal_edit_LanguageSetting" class="btn btn-primary btn-iconv2" style="margin-right: 2px !important;"><i class="fa fa-pen fa-w-16 fa-1x"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+			            }
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+@section ModalsLanguageSetting
+{
+<!-- Modal Language -->
+<div class="modal fade" id="ModalLanguage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>@language.Getkey("modal_add_or_edit_language")
+                <div class="btn-actions-pane-right">
+                    <div role="group" class="btn-group-sm nav btn-group">
+                        <a data-toggle="tab" href="#tab-language-0" class="btn-shadow active btn btn-primary">@language.Getkey("btn_add")</a>
+                        <a data-toggle="tab" href="#tab-language-1" class="btn-shadow  btn btn-primary">@language.Getkey("btn_edit")</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="data_loading_language" style="display: block; margin: auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <rect x="40" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.1388888888888889s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.2777777777777778s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.9722222222222222s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.41666666666666663s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.8333333333333333s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.6944444444444444s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.5555555555555556s" calcMode="discrete"></animate>
+                    </rect>
+                </svg>
+            </div>
+            <div id="data_list_language" class="card-body" style="display: none;">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-language-0" role="tabpanel">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <div class="input-group" style="margin-bottom: 15px;">
+                                    <select id="lase_language_culture_add_new" class="form-control">
+                                        @for (int i = 0; i < ValueC.Count; i++)
+                                        {
+                                        <option data-englishname="@ValueC[i].EnglishName"
+                                                data-nativename="@ValueC[i].NativeName"
+                                                data-culturename="@ValueC[i].CultureName"
+                                                data-twoletter="@ValueC[i].TwoLetter"
+                                                data-parentenglishname="@ValueC[i].ParentEnglishName"
+                                                data-parentnativename="@ValueC[i].ParentNativeName"
+                                                data-parentculturename="@ValueC[i].ParentCultureName"
+                                                data-parenttwoletter="@ValueC[i].ParentTwoLetter">@(ValueC[i].EnglishName + " : " + @ValueC[i].NativeName)</option>
+                                        }
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button id="btn_lase_language_add_new" onclick="btn_lase_language_add_new()" class="btn btn-primary">@language.Getkey("btn_add")</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item-divider nav-item"></li>
+                            <li class="nav-item-btn nav-item" style="padding: 0.5rem 0;">
+                                <div id="lase_list_add_language" style="max-height: 200px; overflow: auto; border: 1px #a1a1a1 solid; padding: 7px;">
+                                    <p style="margin-bottom: 0.3rem;">1. TOTAL ORE</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="tab-language-1" role="tabpanel" style="max-height: 325px; overflow: auto;">
+                        <h5 class="card-title">@language.Getkey("modal_language_title_table")</h5>
+                        <table class="mb-0 table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@language.Getkey("table_col_number")</th>
+                                    <th>@language.Getkey("modal_language_column_name_1")</th>
+                                    <th>@language.Getkey("modal_language_column_name_2")</th>
+                                    <th>@language.Getkey("modal_language_column_name_3")</th>
+                                    <th>@language.Getkey("modal_language_column_name_4")</th>
+                                    <th style="width: 85px;">@language.Getkey("table_col_actions")</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lase_list_edit_language">
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td style="padding: 2px;"><input type="text" class="form-control custom-input" value="ORE TO CRUSHER"></td>
+                                    <td style="padding: 2px;">
+                                        <div class="input-group">
+                                            <button type="button" class="mb-2 mr-2 btn btn-success btn-iconv3"><i class="fa fa-pen fa-w-16 fa-1x"></i></button>
+                                            <button type="button" class="mb-2 mr-2 btn btn-danger btn-iconv3"><i class="fa fa-trash fa-w-16 fa-1x"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@language.Getkey("btn_close")</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal Shared Resource -->
+<div class="modal fade" id="ModalSharedResource" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>@language.Getkey("modal_add_or_edit_sharedresource")
+                <div class="btn-actions-pane-right">
+                    <div role="group" class="btn-group-sm nav btn-group">
+                        <a data-toggle="tab" href="#tab-shared-0" class="btn-shadow active btn btn-primary">@language.Getkey("btn_add")</a>
+                        <a data-toggle="tab" href="#tab-shared-1" class="btn-shadow  btn btn-primary">@language.Getkey("btn_edit")</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="data_loading_shared" style="display: block; margin: auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <rect x="40" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.1388888888888889s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.2777777777777778s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.9722222222222222s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.41666666666666663s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.8333333333333333s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.6944444444444444s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.5555555555555556s" calcMode="discrete"></animate>
+                    </rect>
+                </svg>
+            </div>
+            <div id="data_list_shared" class="card-body" style="display: none;">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-shared-0" role="tabpanel">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <div class="input-group" style="margin-bottom: 15px;">
+                                    <input type="text" id="lase_shared_name_add_new" placeholder="@language.Getkey("modal_sharedresource_input_name_1")" class="form-control">
+                                    <div class="input-group-append">
+                                        <button id="btn_lase_shared_add_new" onclick="btn_lase_shared_add_new()" class="btn btn-primary">@language.Getkey("btn_add")</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item-divider nav-item"></li>
+                            <li class="nav-item-btn nav-item" style="padding: 0.5rem 0;">
+                                <div id="lase_list_add_shared" style="max-height: 200px; overflow: auto; border: 1px #a1a1a1 solid; padding: 7px;">
+                                    <p style="margin-bottom: 0.3rem;">1. TOTAL ORE</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="tab-shared-1" role="tabpanel" style="max-height: 325px; overflow: auto;">
+                        <h5 class="card-title">@language.Getkey("modal_sharedresource_title_table")</h5>
+                        <table class="mb-0 table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>@language.Getkey("table_col_number")</th>
+                                    <th>@language.Getkey("modal_sharedresource_column_name_1")</th>
+                                    <th style="width: 85px;">@language.Getkey("table_col_actions")</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lase_list_edit_shared">
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td style="padding: 2px;"><input type="text" class="form-control custom-input" value="ORE TO CRUSHER"></td>
+                                    <td style="padding: 2px;">
+                                        <div class="input-group">
+                                            <button type="button" class="mb-2 mr-2 btn btn-success btn-iconv3"><i class="fa fa-pen fa-w-16 fa-1x"></i></button>
+                                            <button type="button" class="mb-2 mr-2 btn btn-danger btn-iconv3"><i class="fa fa-trash fa-w-16 fa-1x"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@language.Getkey("btn_close")</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal New Language Setting -->
+<div class="modal fade" id="Modal_add_LanguageSetting" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>@language.Getkey("modal_add_new_kpisce")
+            </div>
+
+            <div id="data_loading_add_kpisce" style="display: block; margin: auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <rect x="40" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.1388888888888889s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.2777777777777778s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.9722222222222222s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.41666666666666663s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.8333333333333333s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.6944444444444444s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.5555555555555556s" calcMode="discrete"></animate>
+                    </rect>
+                </svg>
+            </div>
+
+            <div id="data_list_add_kpisce" class="row card-body" style="display: none;">
+                <div class="col-lg-6">
+                    <div class="tab-content">
+                        <div class="form-group row">
+                            <label for="lase_select_modal_add_kpi" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_lase_input_name_1")</label>
+                            <div class="col-sm-12">
+                                <select type="select" id="lase_select_modal_add_kpi" class="custom-select">
+                                    <option value="-">@language.Getkey("option_select")</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lase_input_modal_add_source" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_lase_input_name_2")</label>
+                            <div class="col-sm-12">
+                                <select type="select" id="lase_select_modal_add_source" class="custom-select" onchange="select_modal_add_change_source()">
+                                    <option value="-">@language.Getkey("option_select")</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lase_input_modal_add_tablename" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_lase_input_name_3")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="lase_input_modal_add_tablename" placeholder="" value="" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lase_input_modal_add_colnamedate" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_lase_input_name_4")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="lase_input_modal_add_colnamedate" placeholder="" value="" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lase_input_modal_add_colnameshift" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_lase_input_name_5")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="lase_input_modal_add_colnameshift" placeholder="" value="" disabled="disabled">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="tab-content">
+                        <div class="form-group row">
+                            <label for="lase_input_modal_add_colnamevalue" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_lase_input_name_6")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="lase_input_modal_add_colnamevalue" placeholder="" value="" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lase_input_modal_add_filteradd" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_lase_input_name_7")</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" id="lase_input_modal_add_filteradd" rows="6" style="width: 100%;" disabled="disabled"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lase_input_modal_add_parameters" class="col-sm-12 col-form-label">@language.Getkey("modal_add_new_lase_input_name_8")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="lase_input_modal_add_parameters" placeholder="" value="" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="text-right">
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <button type="button" id="lase_btn_modal_add" class="btn btn-primary mr-3" onclick="lase_btn_modal_add()">@language.Getkey("btn_save")</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@language.Getkey("btn_close")</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Edit Language Setting -->
+<div class="modal fade" id="Modal_edit_LanguageSetting" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+                <i class="header-icon lnr-license icon-gradient bg-plum-plate"> </i>@language.Getkey("modal_edit_sharedresource_title")
+            </div>
+
+            <div id="data_loading_edit_sharedresource" style="display: block; margin: auto;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(241, 242, 243, 0); display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <rect x="40" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.1388888888888889s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="40" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.2777777777777778s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.9722222222222222s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="47" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.41666666666666663s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="40" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.8333333333333333s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="47" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.6944444444444444s" calcMode="discrete"></animate>
+                    </rect>
+                    <rect x="54" y="54" width="6" height="6" fill="#32aade">
+                        <animate attributeName="fill" values="#216499;#32aade;#32aade" keyTimes="0;0.125;1" dur="1.1111111111111112s" repeatCount="indefinite" begin="0.5555555555555556s" calcMode="discrete"></animate>
+                    </rect>
+                </svg>
+            </div>
+
+            <div id="data_list_edit_sharedresource" class="row card-body" style="display: none;">
+                <div class="col-lg-12">
+                    <div class="tab-content">
+
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-form-label">@language.Getkey("modal_edit_sharedresource_language")&nbsp;<span id="lase_text_modal_edit_englishname"></span></label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lase_input_modal_edit_variable" class="col-sm-12 col-form-label">@language.Getkey("modal_edit_sharedresource_variable")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="lase_input_modal_edit_variable" placeholder="" value="" disabled="disabled">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="lase_input_modal_edit_value" class="col-sm-12 col-form-label">@language.Getkey("modal_edit_sharedresource_value")</label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="lase_input_modal_edit_value" placeholder="" value="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="lase_input_modal_edit_comments" class="col-sm-12 col-form-label">@language.Getkey("modal_edit_sharedresource_comments")</label>
+                            <div class="col-sm-12">
+                                <textarea class="form-control" id="lase_input_modal_edit_comments" rows="4" style="width: 100%;"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="lase_btn_modal_edit" data-editid="" class="btn btn-primary mr-1" onclick="lase_btn_modal_edit()">@language.Getkey("btn_save")</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@language.Getkey("btn_close")</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+}
